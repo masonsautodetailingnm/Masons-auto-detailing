@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mason's Mobile Detailing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #e8b84b; --accent-dark: #c99a2e;
+    --bg: #0a0a0a; --bg2: #111; --bg3: #1a1a1a;
+    --surface: #1e1e1e; --border: #2a2a2a;
+    --text: #f0f0f0; --text-muted: #888; --text-dim: #555;
+    --radius: 6px;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+    --font-condensed: 'Barlow Condensed', sans-serif;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:var(--font-body); background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; }
+
+  /* NAV */
+  nav { position:fixed; top:0; left:0; right:0; z-index:1000; background:rgba(10,10,10,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); padding:0 2rem; height:64px; display:flex; align-items:center; justify-content:space-between; }
+  .nav-logo { font-family:var(--font-display); font-size:1.6rem; letter-spacing:.05em; color:var(--accent); cursor:pointer; text-decoration:none; }
+  .nav-links { display:flex; gap:.25rem; list-style:none; align-items:center; }
+  .nav-links a { font-family:var(--font-condensed); font-size:.85rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); text-decoration:none; padding:.4rem .75rem; border-radius:var(--radius); transition:all .2s; cursor:pointer; }
+  .nav-links a:hover,.nav-links a.active { color:var(--accent); background:rgba(232,184,75,.08); }
+  .nav-cta { background:var(--accent)!important; color:#000!important; font-weight:700!important; padding:.4rem 1rem!important; }
+  .nav-cta:hover { background:var(--accent-dark)!important; }
+  .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:4px; }
+  .hamburger span { display:block; width:24px; height:2px; background:var(--text); transition:all .3s; }
+
+  /* PAGES */
+  .page { display:none; padding-top:64px; min-height:100vh; }
+  .page.active { display:block; }
+
+  /* HERO */
+  .hero { position:relative; min-height:calc(100vh - 64px); display:flex; align-items:center; overflow:hidden; }
+  .hero-video-bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; }
+  .hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.5) 60%,rgba(0,0,0,.3) 100%); z-index:1; }
+  .hero-bg-pattern { position:absolute; inset:0; z-index:2; background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(232,184,75,.012) 40px,rgba(232,184,75,.012) 41px),repeating-linear-gradient(-45deg,transparent,transparent 40px,rgba(232,184,75,.012) 40px,rgba(232,184,75,.012) 41px); }
+  .hero-content { position:relative; z-index:3; padding:4rem; max-width:760px; }
+  .hero-tag { display:inline-block; font-family:var(--font-condensed); font-size:.75rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); border:1px solid rgba(232,184,75,.3); padding:.3rem .8rem; border-radius:2px; margin-bottom:1.5rem; animation:fadeUp .6s ease both; }
+  .hero h1 { font-family:var(--font-display); font-size:clamp(3.5rem,8vw,6.5rem); line-height:.95; letter-spacing:.02em; color:var(--text); margin-bottom:1.5rem; animation:fadeUp .6s .1s ease both; }
+  .hero h1 em { font-style:normal; color:var(--accent); }
+  .hero p { font-size:1.1rem; font-weight:300; color:rgba(240,240,240,.85); line-height:1.7; max-width:520px; margin-bottom:2.5rem; animation:fadeUp .6s .2s ease both; }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; animation:fadeUp .6s .3s ease both; }
+  .btn-primary { display:inline-block; font-family:var(--font-condensed); font-size:.9rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; background:var(--accent); color:#000; padding:.85rem 2rem; border-radius:var(--radius); text-decoration:none; cursor:pointer; border:none; transition:all .2s; }
+  .btn-primary:hover { background:var(--accent-dark); transform:translateY(-1px); }
+  .btn-secondary { display:inline-block; font-family:var(--font-condensed); font-size:.9rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; background:transparent; color:var(--text); padding:.85rem 2rem; border-radius:var(--radius); border:1px solid rgba(255,255,255,.3); cursor:pointer; text-decoration:none; transition:all .2s; }
+  .btn-secondary:hover { border-color:var(--accent); color:var(--accent); }
+  .hero-rating { margin-top:2rem; animation:fadeUp .6s .4s ease both; }
+  .stat-num { font-family:var(--font-display); font-size:2rem; color:var(--accent); line-height:1; }
+  .stat-label { font-family:var(--font-condensed); font-size:.7rem; font-weight:600; letter-spacing:.15em; text-transform:uppercase; color:rgba(240,240,240,.5); margin-top:.25rem; }
+
+  /* SECTIONS */
+  .section { padding:5rem 4rem; max-width:1200px; margin:0 auto; }
+  .section-header { margin-bottom:3rem; }
+  .section-tag { display:inline-block; font-family:var(--font-condensed); font-size:.7rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:.75rem; }
+  .section-title { font-family:var(--font-display); font-size:clamp(2rem,4vw,3rem); letter-spacing:.03em; color:var(--text); line-height:1.1; }
+  .section-sub { font-size:1rem; color:var(--text-muted); font-weight:300; margin-top:.75rem; max-width:550px; line-height:1.6; }
+  .divider { width:48px; height:3px; background:var(--accent); margin:1rem 0; }
+
+  /* SERVICES */
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+  .service-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; transition:all .3s; position:relative; }
+  .service-card:hover { border-color:var(--accent); transform:translateY(-3px); box-shadow:0 12px 40px rgba(232,184,75,.1); }
+  .service-card.featured { border-color:rgba(232,184,75,.4); background:linear-gradient(135deg,#1e1e1e 0%,#1a1a14 100%); }
+  .service-badge { position:absolute; top:1rem; right:1rem; font-family:var(--font-condensed); font-size:.65rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; background:var(--accent); color:#000; padding:.2rem .6rem; border-radius:2px; }
+  .service-card-inner { padding:2rem; }
+  .service-icon { font-size:2rem; margin-bottom:1rem; }
+  .service-name { font-family:var(--font-display); font-size:1.6rem; letter-spacing:.04em; color:var(--text); margin-bottom:.5rem; }
+  .service-price { font-family:var(--font-condensed); font-size:1.4rem; font-weight:700; color:var(--accent); margin-bottom:1rem; }
+  .service-price span { font-size:.85rem; color:var(--text-dim); font-weight:400; }
+  .service-desc { font-size:.9rem; color:var(--text-muted); line-height:1.6; margin-bottom:1.25rem; }
+  .service-includes { list-style:none; display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.5rem; }
+  .service-includes li { font-size:.85rem; color:var(--text-muted); display:flex; align-items:flex-start; gap:.5rem; }
+  .service-includes li::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; margin-top:.45em; }
+  .addons-section { margin-top:3rem; }
+  .addons-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:1rem; }
+  .addon-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:1.25rem; transition:all .2s; }
+  .addon-card:hover { border-color:rgba(232,184,75,.3); background:var(--surface); }
+  .addon-icon { font-size:1.4rem; margin-bottom:.5rem; }
+  .addon-name { font-family:var(--font-condensed); font-size:1rem; font-weight:700; letter-spacing:.05em; color:var(--text); margin-bottom:.25rem; }
+  .addon-price { font-size:.85rem; color:var(--accent); font-weight:600; margin-bottom:.5rem; }
+  .addon-desc { font-size:.8rem; color:var(--text-dim); line-height:1.5; }
+
+  /* GALLERY */
+  .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:1.5rem; }
+  .ba-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  .ba-images { display:grid; grid-template-columns:1fr 1fr; gap:2px; }
+  .ba-img-slot { aspect-ratio:4/3; background:var(--bg3); display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; position:relative; overflow:hidden; transition:background .2s; }
+  .ba-img-slot:hover { background:#222; }
+  .ba-img-slot img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+  .ba-img-slot .upload-placeholder { display:flex; flex-direction:column; align-items:center; gap:.5rem; color:var(--text-dim); font-family:var(--font-condensed); font-size:.75rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; position:relative; z-index:1; }
+  .ba-img-slot .upload-placeholder svg { opacity:.4; }
+  .ba-label { position:absolute; top:.5rem; left:.5rem; font-family:var(--font-condensed); font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.15rem .5rem; border-radius:2px; z-index:2; }
+  .ba-label.before { background:rgba(0,0,0,.7); color:#aaa; }
+  .ba-label.after { background:var(--accent); color:#000; }
+  .ba-card-info { padding:1rem 1.25rem; }
+  .ba-card-title { font-family:var(--font-condensed); font-size:.9rem; font-weight:700; letter-spacing:.05em; color:var(--text); }
+  .ba-card-sub { font-size:.75rem; color:var(--text-dim); margin-top:.1rem; }
+  .input-hidden { display:none; }
+
+  /* REVIEWS */
+  .reviews-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.25rem; }
+  .review-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; overflow:hidden; transition:border-color .2s; }
+  .review-card:hover { border-color:rgba(232,184,75,.25); }
+  .review-img { width:100%; aspect-ratio:16/9; background:var(--bg3); display:flex; align-items:center; justify-content:center; cursor:pointer; position:relative; overflow:hidden; }
+  .review-img img { width:100%; height:100%; object-fit:contain; object-position:center; position:absolute; inset:0; background:#111; }
+  .review-img .img-placeholder { display:flex; flex-direction:column; align-items:center; gap:.5rem; color:var(--text-dim); font-family:var(--font-condensed); font-size:.7rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase; position:relative; z-index:1; }
+  .review-img .img-placeholder svg { opacity:.3; }
+  .review-body { padding:1.25rem 1.5rem; }
+  .review-quote { font-size:1.8rem; color:var(--accent); opacity:.4; font-family:Georgia,serif; line-height:1; margin-bottom:.4rem; }
+  .review-stars { color:var(--accent); font-size:.9rem; margin-bottom:.6rem; letter-spacing:.1em; }
+  .review-text { font-size:.88rem; color:var(--text-muted); line-height:1.7; margin-bottom:1rem; }
+  .review-author { font-family:var(--font-condensed); font-size:.85rem; font-weight:700; letter-spacing:.05em; color:var(--text); }
+  .review-date { font-size:.75rem; color:var(--text-dim); margin-top:.1rem; }
+  .review-service-tag { display:inline-block; font-family:var(--font-condensed); font-size:.65rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; background:rgba(232,184,75,.1); color:var(--accent); border:1px solid rgba(232,184,75,.2); padding:.15rem .5rem; border-radius:2px; margin-top:.5rem; width:fit-content; }
+
+  /* REFERRAL BANNER */
+  .referral-banner { background:linear-gradient(135deg,rgba(232,184,75,.12) 0%,rgba(232,184,75,.05) 100%); border:1px solid rgba(232,184,75,.3); border-radius:8px; padding:2rem 2.5rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap; margin-bottom:3rem; }
+  .referral-icon { font-size:2.5rem; flex-shrink:0; }
+  .referral-title { font-family:var(--font-display); font-size:1.6rem; letter-spacing:.04em; color:var(--text); margin-bottom:.35rem; }
+  .referral-sub { font-size:.9rem; color:var(--text-muted); line-height:1.6; }
+  .referral-pills { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:.75rem; }
+  .referral-pill { font-family:var(--font-condensed); font-size:.85rem; font-weight:700; letter-spacing:.06em; background:var(--accent); color:#000; padding:.35rem .9rem; border-radius:20px; }
+
+  /* BOOKING */
+  .booking-layout { display:flex; flex-direction:column; gap:2rem; }
+  .booking-form { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:2rem; width:100%; }
+  .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .form-group { display:flex; flex-direction:column; gap:.4rem; margin-bottom:1.25rem; }
+  .form-group label { font-family:var(--font-condensed); font-size:.75rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted); }
+  .form-group input,.form-group select,.form-group textarea { background:var(--bg2); border:1px solid var(--border); color:var(--text); font-family:var(--font-body); font-size:.9rem; padding:.7rem .9rem; border-radius:var(--radius); outline:none; transition:border-color .2s; width:100%; }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus { border-color:var(--accent); }
+  .form-group select option { background:var(--bg2); }
+  .form-group textarea { resize:vertical; min-height:100px; }
+  .booking-info { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+  .info-card { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:1.5rem; margin-bottom:1rem; }
+  .info-card h3 { font-family:var(--font-display); font-size:1.2rem; letter-spacing:.05em; color:var(--text); margin-bottom:1rem; }
+  .info-item { display:flex; gap:.75rem; margin-bottom:1rem; align-items:flex-start; }
+  .info-icon { font-size:1.1rem; margin-top:.1rem; flex-shrink:0; }
+  .info-label { font-family:var(--font-condensed); font-size:.75rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-dim); margin-bottom:.1rem; }
+  .info-val { font-size:.9rem; color:var(--text-muted); }
+  .submit-btn { width:100%; padding:1rem; font-family:var(--font-display); font-size:1.1rem; letter-spacing:.1em; background:var(--accent); color:#000; border:none; border-radius:var(--radius); cursor:pointer; transition:all .2s; margin-top:.5rem; }
+  .submit-btn:hover { background:var(--accent-dark); transform:translateY(-1px); }
+
+  /* FAQ */
+  .faq-list { display:flex; flex-direction:column; gap:.75rem; max-width:800px; }
+  .faq-item { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:border-color .2s; }
+  .faq-item.open { border-color:rgba(232,184,75,.3); }
+  .faq-q { padding:1.25rem 1.5rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-family:var(--font-condensed); font-size:1rem; font-weight:600; letter-spacing:.02em; color:var(--text); user-select:none; gap:1rem; }
+  .faq-q:hover { color:var(--accent); }
+  .faq-chevron { flex-shrink:0; font-size:1.2rem; color:var(--accent); transition:transform .3s; }
+  .faq-item.open .faq-chevron { transform:rotate(180deg); }
+  .faq-a { max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .faq-item.open .faq-a { max-height:500px; }
+  .faq-a-inner { padding:0 1.5rem 1.25rem; font-size:.9rem; color:var(--text-muted); line-height:1.7; border-top:1px solid var(--border); padding-top:1rem; }
+
+  /* TERMS */
+  .terms-tabs { display:flex; gap:.5rem; margin-bottom:2rem; }
+  .terms-tab { font-family:var(--font-condensed); font-size:.85rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:.6rem 1.25rem; border-radius:var(--radius); border:1px solid var(--border); cursor:pointer; color:var(--text-muted); background:transparent; transition:all .2s; }
+  .terms-tab.active { background:var(--accent); color:#000; border-color:var(--accent); }
+  .terms-body { max-width:800px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:2.5rem; }
+  .terms-body h2 { font-family:var(--font-display); font-size:1.3rem; letter-spacing:.05em; color:var(--accent); margin:2rem 0 .75rem; }
+  .terms-body h2:first-child { margin-top:0; }
+  .terms-body p,.terms-body li { font-size:.88rem; color:var(--text-muted); line-height:1.75; margin-bottom:.5rem; }
+  .terms-body ul { padding-left:1.5rem; margin-bottom:1rem; }
+  .terms-body strong { color:var(--text); }
+  .terms-updated { font-size:.8rem; color:var(--text-dim); margin-top:2rem; padding-top:1rem; border-top:1px solid var(--border); }
+  /* Terms accordions */
+  .terms-accordion { display:flex; flex-direction:column; gap:.6rem; }
+  .terms-acc-item { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; }
+  .terms-acc-item.open { border-color:rgba(232,184,75,.25); }
+  .terms-acc-q { padding:1rem 1.25rem; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-family:var(--font-condensed); font-size:.95rem; font-weight:700; letter-spacing:.04em; color:var(--text); user-select:none; gap:1rem; }
+  .terms-acc-q:hover { color:var(--accent); }
+  .terms-acc-chevron { color:var(--accent); transition:transform .3s; font-size:1rem; flex-shrink:0; }
+  .terms-acc-item.open .terms-acc-chevron { transform:rotate(180deg); }
+  .terms-acc-body { max-height:0; overflow:hidden; transition:max-height .35s ease; }
+  .terms-acc-item.open .terms-acc-body { max-height:1000px; }
+  .terms-acc-inner { padding:.75rem 1.25rem 1.25rem; font-size:.85rem; color:var(--text-muted); line-height:1.7; border-top:1px solid var(--border); }
+  .terms-acc-inner ul { padding-left:1.25rem; margin:.5rem 0; }
+  .terms-acc-inner li { margin-bottom:.3rem; }
+
+  /* CONTACT */
+  .contact-layout { display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
+  .contact-item { display:flex; gap:1rem; margin-bottom:1.75rem; align-items:flex-start; }
+  .contact-icon-wrap { width:44px; height:44px; border-radius:var(--radius); background:rgba(232,184,75,.1); border:1px solid rgba(232,184,75,.2); display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+  .contact-label { font-family:var(--font-condensed); font-size:.7rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:var(--text-dim); margin-bottom:.25rem; }
+  .contact-val { font-size:.95rem; color:var(--text); }
+  .contact-val a { color:var(--accent); text-decoration:none; }
+  .contact-form { background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:2rem; }
+  .contact-form h3 { font-family:var(--font-display); font-size:1.5rem; letter-spacing:.05em; color:var(--text); margin-bottom:1.5rem; }
+  .social-links { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem; }
+  .social-link { display:inline-flex; align-items:center; gap:.4rem; font-family:var(--font-condensed); font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--text-muted); text-decoration:none; border:1px solid var(--border); padding:.4rem .8rem; border-radius:var(--radius); transition:all .2s; }
+  .social-link:hover { border-color:var(--accent); color:var(--accent); }
+
+  /* FOOTER */
+  footer { background:var(--bg2); border-top:1px solid var(--border); padding:2rem 4rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+  .footer-brand { font-family:var(--font-display); font-size:1.2rem; letter-spacing:.05em; color:var(--accent); }
+  .footer-copy { font-size:.8rem; color:var(--text-dim); }
+  .footer-links { display:flex; gap:1.5rem; list-style:none; }
+  .footer-links a { font-size:.8rem; color:var(--text-dim); text-decoration:none; cursor:pointer; transition:color .2s; }
+  .footer-links a:hover { color:var(--accent); }
+
+  /* TOAST */
+  .toast { position:fixed; bottom:2rem; right:2rem; background:var(--accent); color:#000; font-family:var(--font-condensed); font-size:.9rem; font-weight:700; letter-spacing:.05em; padding:1rem 1.5rem; border-radius:var(--radius); z-index:9999; transform:translateY(100px); opacity:0; transition:all .4s cubic-bezier(.34,1.56,.64,1); }
+  .toast.show { transform:translateY(0); opacity:1; }
+
+  @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+  @media (max-width:900px) {
+    .section { padding:3rem 1.5rem; }
+    .hero-content { padding:2rem 1.5rem; }
+    .booking-info { grid-template-columns:1fr; }
+    .contact-layout { grid-template-columns:1fr; }
+    .form-row { grid-template-columns:1fr; }
+    footer { padding:1.5rem; flex-direction:column; text-align:center; }
+    .nav-links { display:none; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:var(--bg); border-bottom:1px solid var(--border); padding:1rem; gap:.25rem; }
+    .nav-links.open { display:flex; }
+    .hamburger { display:flex; }
+    .referral-banner { flex-direction:column; text-align:center; }
+    .why-us-strip { padding:2rem 1.5rem !important; }
+    .why-us-grid { grid-template-columns:1fr 1fr !important; gap:1.5rem !important; }
+  }
+  @media (max-width:600px) {
+    .services-grid { grid-template-columns:1fr; }
+    .gallery-grid { grid-template-columns:1fr; }
+    .addons-grid { grid-template-columns:1fr; }
+    .reviews-grid { grid-template-columns:1fr; }
+    .why-us-grid { grid-template-columns:1fr 1fr !important; }
+    .hero-content { padding:1.5rem 1.25rem; }
+    .hero p { font-size:1rem; }
+    .hero-btns { flex-direction:column; gap:.75rem; }
+    .btn-primary, .btn-secondary { text-align:center; width:100%; box-sizing:border-box; }
+    .referral-pills { justify-content:center; }
+    .terms-tabs { flex-wrap:wrap; }
+    .social-links { justify-content:center; }
+    nav { padding:0 1rem; }
+    footer { padding:1.25rem 1rem; }
+    .footer-links { gap:1rem; }
+    .service-card-inner { padding:1.5rem; }
+    .addon-card { padding:1rem; }
+    .info-card { padding:1.25rem; }
+    .contact-form { padding:1.5rem; }
+    .booking-form { padding:1.5rem; }
+    .terms-body { padding:1.5rem; }
+    .section-title { font-size:clamp(1.6rem,6vw,2.4rem); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" onclick="showPage('home')">Mason's</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="showPage('home')">Home</a></li>
+    <li><a onclick="showPage('services')">Services</a></li>
+    
+    <li><a onclick="showPage('reviews')">Reviews</a></li>
+    <li><a onclick="showPage('faq')">FAQ</a></li>
+    <li><a onclick="showPage('contact')">Contact</a></li>
+    <li><a class="nav-cta" onclick="showPage('booking')">Book Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <!-- Replace the src below with a real video or image URL -->
+    
+
+<div id="heroImageSlot" style="position:absolute;inset:0;cursor:pointer;overflow:hidden;z-index:0;" onclick="document.getElementById('heroImageUpload').click()">
+<img class="hero-video-bg" id="heroImage" src="https://i.postimg.cc/NGZHgdNc/home-page.jpg" alt="Clean detailed car">
+</div>
+<input type="file" id="heroImageUpload" accept="image/*" style="display:none;">
+
+
+    <div class="hero-overlay"></div>
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-tag">📍 Mobile — We Come to You</div>
+      <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1rem;animation:fadeUp .6s .05s ease both;">
+        <span style="font-family:var(--font-condensed);font-size:.78rem;font-weight:600;letter-spacing:.06em;color:rgba(240,240,240,.7);display:flex;align-items:center;gap:.35rem;">📞 <a href="tel:5722352991" style="color:inherit;text-decoration:none;">572-235-2991</a></span>
+        <span style="font-family:var(--font-condensed);font-size:.78rem;font-weight:600;letter-spacing:.06em;color:rgba(240,240,240,.7);">·</span>
+        <span style="font-family:var(--font-condensed);font-size:.78rem;font-weight:600;letter-spacing:.06em;color:rgba(240,240,240,.7);">🗺️ Norman, OK &amp; within 30 miles</span>
+      </div>
+      <h1>Your Car.<br><em>Our Passion.</em></h1>
+      <p>Mason's Mobile Detailing brings professional-grade car care straight to your driveway. From deep interior cleans to long-lasting ceramic coatings — we handle it all.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('booking')">Book a Detail</button>
+        <button class="btn-secondary" onclick="showPage('services')">View Services</button>
+      </div>
+      <div class="hero-rating">
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US STRIP -->
+  <div class="why-us-strip" style="background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 4rem;">
+    <div class="why-us-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;">
+      <div>
+        <div style="font-size:1.8rem;margin-bottom:.5rem;">🚗</div>
+        <div style="font-family:var(--font-condensed);font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin-bottom:.25rem;">We Come to You</div>
+        <div style="font-size:.8rem;color:var(--text-dim);">Mobile service — your driveway, office, anywhere.</div>
+      </div>
+      <div>
+        <div style="font-size:1.8rem;margin-bottom:.5rem;">🏆</div>
+        <div style="font-family:var(--font-condensed);font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin-bottom:.25rem;">Pro Products</div>
+        <div style="font-size:.8rem;color:var(--text-dim);">Professional-grade chemicals and tools only.</div>
+      </div>
+      <div>
+        <div style="font-size:1.8rem;margin-bottom:.5rem;">⏱️</div>
+        <div style="font-family:var(--font-condensed);font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin-bottom:.25rem;">Reliable & On-Time</div>
+        <div style="font-size:.8rem;color:var(--text-dim);">We respect your time and honor our appointments.</div>
+      </div>
+      <div>
+        <div style="font-size:1.8rem;margin-bottom:.5rem;">💯</div>
+        <div style="font-family:var(--font-condensed);font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text);margin-bottom:.25rem;">Satisfaction Guaranteed</div>
+        <div style="font-size:.8rem;color:var(--text-dim);">Not happy? We make it right, no questions asked.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">Mason's Mobile Detailing</div>
+    <div class="footer-copy">© 2025 Mason's Mobile Detailing. All rights reserved.</div>
+    <ul class="footer-links">
+      <li><a onclick="showPage('terms')">Terms</a></li>
+      <li><a onclick="showPage('faq')">FAQ</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<div class="page" id="page-services">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">What We Offer</div>
+      <h2 class="section-title">Our Services</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Three core packages to fit every need and budget, plus add-ons to take your detail to the next level.</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- EXTERIOR -->
+      <div class="service-card">
+        <div class="service-card-inner">
+          <div class="service-icon">✨</div>
+          <div class="service-name">Exterior Detail</div>
+          <div class="service-price">Starting at $120 <span>/ sedan</span></div>
+          <div style="font-family:var(--font-condensed);font-size:.75rem;font-weight:600;letter-spacing:.08em;color:var(--text-dim);margin-bottom:1rem;">⏱️ ~1 hour</div>
+          <div class="service-desc">A thorough exterior transformation — hand wash and a showroom-quality finish from top to bottom.</div>
+          <ul class="service-includes">
+            <li>Hand wash & rinse</li>
+            <li>Clay towel decontamination</li>
+            <li>Tire & wheel cleaning</li>
+            <li>Tire coating & protection</li>
+            <li>Door jamb wipe-down</li>
+            <li>Windows cleaned (exterior)</li>
+            <li>Paint protection — lasts up to 3 months</li>
+            <li>Trim dressing</li>
+          </ul>
+          <button class="btn-primary" onclick="showPage('booking')">Book This</button>
+        </div>
+      </div>
+
+      <!-- INTERIOR -->
+      <div class="service-card">
+        <div class="service-card-inner">
+          <div class="service-icon">🪑</div>
+          <div class="service-name">Interior Detail</div>
+          <div class="service-price">Starting at $175 <span>/ sedan</span></div>
+          <div style="font-family:var(--font-condensed);font-size:.75rem;font-weight:600;letter-spacing:.08em;color:var(--text-dim);margin-bottom:1rem;">⏱️ ~1.5 hours</div>
+          <div class="service-desc">Deep cleaning and restoration of every surface inside your vehicle — we leave no corner untouched.</div>
+          <ul class="service-includes">
+            <li>Full vacuum (seats, floors, trunk)</li>
+            <li>Leather/vinyl cleaning & conditioning</li>
+            <li>Dashboard & console detail</li>
+            <li>Door panels wiped & dressed</li>
+            <li>Windows cleaned (interior)</li>
+            <li>UV protection — lasts up to 3 months</li>
+            <li>Air freshener of your choice</li>
+          </ul>
+          <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:1.25rem;">Carpet shampoo & steam clean available as add-ons.</p>
+          <button class="btn-primary" onclick="showPage('booking')">Book This</button>
+        </div>
+      </div>
+
+      <!-- FULL DETAIL -->
+      <div class="service-card featured">
+        <div class="service-badge">Most Popular</div>
+        <div class="service-card-inner">
+          <div class="service-icon">🏆</div>
+          <div class="service-name">Full Detail</div>
+          <div class="service-price">Starting at $275 <span>/ sedan</span></div>
+          <div style="font-family:var(--font-condensed);font-size:.75rem;font-weight:600;letter-spacing:.08em;color:var(--text-dim);margin-bottom:1rem;">⏱️ ~2.5 hours</div>
+          <div class="service-desc">The complete package — inside and out. The best way to restore your vehicle to like-new condition.</div>
+          <ul class="service-includes">
+            <li>Hand wash & rinse</li>
+            <li>Clay towel decontamination</li>
+            <li>Tire & wheel cleaning + tire coating</li>
+            <li>Paint protection — lasts up to 3 months</li>
+            <li>Trim & door jamb dressing</li>
+            <li>Full vacuum (seats, floors, trunk)</li>
+            <li>Leather/vinyl cleaning & conditioning</li>
+            <li>Dashboard, console & door panels</li>
+            <li>UV protection — lasts up to 3 months</li>
+            <li>All windows cleaned (inside & out)</li>
+            <li>Air freshener of your choice</li>
+          </ul>
+          <button class="btn-primary" onclick="showPage('booking')">Book This</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREMIUM STANDALONE SERVICES -->
+    <div class="addons-section">
+      <div class="section-header">
+        <div class="section-tag">Premium Services</div>
+        <h2 class="section-title">Ceramic Coating & Paint Correction</h2>
+        <div class="divider"></div>
+        <p class="section-sub">These are standalone services that go beyond a standard detail — ideal for vehicles that deserve the best long-term protection and finish.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-bottom:3rem;">
+        <div class="service-card featured">
+          <div class="service-card-inner">
+            <div class="service-icon">🛡️</div>
+            <div class="service-name">Ceramic Coating</div>
+            <div class="service-price">Starting at $750 <span>/ sedan</span></div>
+            <div class="service-desc">A true standalone service. A liquid polymer chemically bonds to your paint, creating a durable, hydrophobic layer that repels water, UV rays, dirt, and contaminants — lasting years, not months.</div>
+            <ul class="service-includes">
+              <li>Exterior detail included</li>
+              <li>Compound & polish included</li>
+              <li>Professional ceramic coating application</li>
+              <li>Hydrophobic protection — lasts 2–5+ years</li>
+              <li>UV and oxidation resistance</li>
+            </ul>
+            <button class="btn-primary" onclick="showPage('booking')">Book This</button>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-card-inner">
+            <div class="service-icon">🪟</div>
+            <div class="service-name">Compound & Polish</div>
+            <div class="service-price">Starting at $300 <span>/ sedan</span></div>
+            <div class="service-desc">A dedicated paint correction service — machine compound and polish removes swirl marks, light scratches, water spots, and oxidation to restore your paint's true depth and gloss.</div>
+            <ul class="service-includes">
+              <li>Exterior detail included</li>
+              <li>Machine compound (cut stage)</li>
+              <li>Machine polish (refine stage)</li>
+              <li>Swirl mark & light scratch removal</li>
+              <li>Oxidation correction</li>
+              <li>Paint inspection before & after</li>
+            </ul>
+            <button class="btn-primary" onclick="showPage('booking')">Book This</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD-ONS -->
+    <div class="addons-section">
+      <div class="section-header">
+        <div class="section-tag">Enhance Your Detail</div>
+        <h2 class="section-title">Add-On Services</h2>
+        <div class="divider"></div>
+        <p class="section-sub">Customize any package with these extras.</p>
+      </div>
+      <div class="addons-grid">
+        <div class="addon-card">
+          <div class="addon-icon">🧽</div>
+          <div class="addon-name">Carpet Shampoo / Extraction</div>
+          <div class="addon-price">Starting at $100</div>
+          <div class="addon-desc">Deep shampoo and hot-water extraction of carpets and floor mats to lift embedded dirt and stains.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon">💨</div>
+          <div class="addon-name">Steam Clean & Sanitize</div>
+          <div class="addon-price">Starting at $45</div>
+          <div class="addon-desc">High-pressure steam to deep clean and sanitize surfaces, cracks, and vents.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon">⚙️</div>
+          <div class="addon-name">Engine Bay Detail</div>
+          <div class="addon-price">Starting at $75</div>
+          <div class="addon-desc">Degrease, clean, and dress the engine bay to factory-fresh condition safely.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon">💡</div>
+          <div class="addon-name">Headlight Restoration</div>
+          <div class="addon-price">Starting at $49</div>
+          <div class="addon-desc">Polish and seal oxidized headlights for restored clarity and safer nighttime driving.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon">🧴</div>
+          <div class="addon-name">Trim Restoration</div>
+          <div class="addon-price">Starting at $30</div>
+          <div class="addon-desc">Restore faded plastic trim back to a deep, rich black finish with lasting protection.</div>
+        </div>
+        <div class="addon-card">
+          <div class="addon-icon">🔬</div>
+          <div class="addon-name">Micro Decontamination</div>
+          <div class="addon-price">Starting at $150</div>
+          <div class="addon-desc">Additional clay bar decontamination to remove stubborn bonded contaminants, industrial fallout, and rail dust.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);max-width:600px;">
+      <p style="font-size:.85rem;color:var(--text-muted);">💬 <strong style="color:var(--text);">Pricing Note:</strong> Prices vary by vehicle size (sedan, SUV/truck, van). Contact us for an exact quote or select your vehicle type during booking.</p>
+    </div>
+  </div>
+  <footer><div class="footer-brand">Mason's Mobile Detailing</div><div class="footer-copy">© 2025 Mason's Mobile Detailing. All rights reserved.</div><ul class="footer-links"><li><a onclick="showPage('terms')">Terms</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></footer>
+</div>
+
+<!-- ===== GALLERY ===== -->
+<div class="page" id="page-gallery">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">Our Work</div>
+      <h2 class="section-title">Before & After</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Click any photo slot to upload before/after images and show off the transformation.</p>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+<div class="ba-card"><div class="ba-images">
+<div class="ba-img-slot"><span class="ba-label before">Before</span></div>
+<div class="ba-img-slot"><span class="ba-label after">After</span></div>
+</div><div class="ba-card-info"><div class="ba-card-title">Chrysler 300 Detail Transformation</div></div></div>
+</div>
+<div style="margin-top:3rem">
+<div class="section-header"><div class="section-tag">Customer Love</div><h2 class="section-title">Reviews</h2></div>
+<div id="reviewsGridGallery" class="reviews-grid"></div></div>
+  </div>
+  <footer><div class="footer-brand">Mason's Mobile Detailing</div><div class="footer-copy">© 2025 Mason's Mobile Detailing. All rights reserved.</div><ul class="footer-links"><li><a onclick="showPage('terms')">Terms</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></footer>
+</div>
+
+<!-- ===== REVIEWS ===== -->
+<div class="page" id="page-reviews">
+  <div class="section">
+    <!-- REFERRAL BANNER -->
+    <div class="referral-banner">
+      <div class="referral-icon">🎁</div>
+      <div>
+        <div class="referral-title">Refer a Friend, Both of You Win!</div>
+        <div class="referral-sub">Love your detail? Send a friend our way. When they book their first service, they get <strong>20% off</strong> — and you get <strong>$20 cash back</strong>. No limit on referrals.</div>
+        <div class="referral-pills">
+          <span class="referral-pill">You Get $20</span>
+          <span class="referral-pill">They Get 20% Off</span>
+        </div>
+        <p style="font-size:.78rem;color:var(--text-dim);margin-top:.75rem;">Just have your friend mention your name when booking. That's it.</p>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <div class="section-tag">Customer Love</div>
+      <h2 class="section-title">What People Are Saying</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Real reviews from real customers. We let our work speak for itself.</p>
+    </div>
+
+    <!-- PHOTO CAROUSEL + FEATURED REVIEW (same width as reviews grid) -->
+    <div style="margin-bottom:2rem;">
+      <div style="position:relative;background:#000;overflow:hidden;height:400px;border-radius:8px;border:1px solid var(--border);" id="reviewsCarousel">
+        <div id="reviewsCarouselTrack" style="display:flex;height:100%;transition:transform .5s ease;"></div>
+        <button onclick="reviewsCarouselMove(-1)" style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.55);border:none;color:#fff;font-size:1.8rem;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;">‹</button>
+        <button onclick="reviewsCarouselMove(1)" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.55);border:none;color:#fff;font-size:1.8rem;width:44px;height:44px;border-radius:50%;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;">›</button>
+        <div id="reviewsCarouselDots" style="position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);display:flex;gap:.4rem;z-index:2;"></div>
+      </div>
+      <script>
+      (function(){
+        const imgs = [
+          'https://i.postimg.cc/9QvbB59n/IMG-8278.jpg',
+          'https://i.postimg.cc/sXZRNR0C/IMG-8287.jpg',
+          'https://i.postimg.cc/VvQcyH2V/IMG-8288.jpg',
+          'https://i.postimg.cc/hj7q5qZN/IMG-8289.jpg',
+          'https://i.postimg.cc/5ydMckD7/IMG-8291.jpg',
+          'https://i.postimg.cc/zvCYqFrn/IMG-8292.jpg',
+          'https://i.postimg.cc/2yz2BQWV/IMG-8277.jpg',
+          'https://i.postimg.cc/zG97kZhQ/IMG-8279.jpg',
+          'https://i.postimg.cc/HnpB7wMx/IMG-8281.jpg'
+        ];
+        let cur = 0;
+        const track = document.getElementById('reviewsCarouselTrack');
+        const dots = document.getElementById('reviewsCarouselDots');
+        imgs.forEach((src, i) => {
+          const slide = document.createElement('div');
+          slide.style.cssText = 'min-width:100%;height:100%;flex-shrink:0;';
+          const img = document.createElement('img');
+          img.src = src; img.alt = 'Detail photo ' + (i+1);
+          img.style.cssText = 'width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:#111;';
+          slide.appendChild(img); track.appendChild(slide);
+          const dot = document.createElement('div');
+          dot.style.cssText = 'width:8px;height:8px;border-radius:50%;background:' + (i===0?'#fff':'rgba(255,255,255,.4)') + ';cursor:pointer;transition:background .3s;';
+          dot.onclick = () => rcGoTo(i); dots.appendChild(dot);
+        });
+        function rcGoTo(n) {
+          cur = (n + imgs.length) % imgs.length;
+          track.style.transform = 'translateX(-' + cur * 100 + '%)';
+          dots.querySelectorAll('div').forEach((d,i) => d.style.background = i===cur ? '#fff' : 'rgba(255,255,255,.4)');
+        }
+        window.reviewsCarouselMove = function(dir) { rcGoTo(cur + dir); };
+        setInterval(() => rcGoTo(cur + 1), 5000);
+      })();
+      </script>
+      <!-- FEATURED REVIEW CARD -->
+      <div style="margin-top:1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.5rem 1.75rem;display:flex;flex-direction:column;gap:.75rem;">
+        <div style="display:flex;align-items:center;gap:.75rem;">
+          <div style="width:44px;height:44px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.1rem;color:#000;font-weight:700;flex-shrink:0;">C</div>
+          <div>
+            <div style="font-family:var(--font-condensed);font-size:.9rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--text);">Christopher M.</div>
+            <div style="font-size:.75rem;color:var(--text-dim);">March 2025 · Full Detail + Carpet Shampoo / Extraction</div>
+          </div>
+          <div style="margin-left:auto;color:#f5c518;font-size:1rem;letter-spacing:.1em;">★★★★★</div>
+        </div>
+        <p style="font-size:.9rem;color:var(--text-muted);line-height:1.7;margin:0;">My Challenger had been through a lot — muddy floors, stained carpet, the works. Mason did the full detail plus the carpet shampoo and extraction and I genuinely couldn't believe it was the same car. The carpets came out looking factory fresh. Super professional, showed up on time, and didn't cut any corners. Already booked him again.</p>
+      </div>
+    </div>
+
+    <div class="reviews-grid" id="reviewsGrid">
+      <!-- Reviews built by JS -->
+    </div>
+
+    <div style="margin-top:3rem;padding:2rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;text-align:center;max-width:560px;margin-left:auto;margin-right:auto;">
+      <div style="font-size:1.5rem;margin-bottom:.75rem;">⭐</div>
+      <div style="font-family:var(--font-display);font-size:1.4rem;letter-spacing:.05em;color:var(--text);margin-bottom:.5rem;">Had a great experience?</div>
+      <p style="font-size:.85rem;color:var(--text-muted);margin-bottom:1.25rem;">Leave us a review on Google and help other customers find us!</p>
+      <a href="#" target="_blank" class="btn-primary">Leave a Google Review</a>
+    </div>
+  </div>
+  <footer><div class="footer-brand">Mason's Mobile Detailing</div><div class="footer-copy">© 2025 Mason's Mobile Detailing. All rights reserved.</div><ul class="footer-links"><li><a onclick="showPage('terms')">Terms</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></footer>
+</div>
+
+<!-- ===== BOOKING ===== -->
+<div class="page" id="page-booking">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">Schedule Service</div>
+      <h2 class="section-title">Book a Detail</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Fill out the form below and we'll confirm your appointment within 24 hours.</p>
+    </div>
+    <div class="booking-layout">
+      <div class="booking-form" id="bookingFormWrap">
+        <div data-fs-success style="display:none;text-align:center;padding:3rem 1rem;">
+          <div style="font-size:3rem;margin-bottom:1rem;">✅</div>
+          <div style="font-family:var(--font-display);font-size:1.8rem;letter-spacing:.05em;color:var(--text);margin-bottom:.75rem;">Request Sent!</div>
+          <p style="font-size:.95rem;color:var(--text-muted);line-height:1.7;">We'll confirm your appointment within 24 hours via text or email.</p>
+        </div>
+        <div data-fs-error style="font-size:.85rem;color:#e05c5c;margin-bottom:1rem;display:none;"></div>
+        <form id="bookingForm" action="https://formspree.io/f/xwvjblae" method="POST">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="John"></div>
+          <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Smith"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" placeholder="(572) 555-0100"></div>
+          <div class="form-group"><label>Email Address</label><input type="email" name="email" placeholder="john@example.com"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Vehicle Year & Make</label><input type="text" name="vehicle" placeholder="2020 Toyota Camry"></div>
+          <div class="form-group">
+            <label>Vehicle Size</label>
+            <select name="vehicle_size"><option>Sedan / Coupe</option><option>SUV / Crossover</option><option>Truck (standard)</option><option>Truck (extended / crew cab)</option><option>Van / Minivan</option><option>Other</option></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Service Package</label>
+          <select name="service_package" id="servicePackageSelect" onchange="showServiceNote(this)">
+            <option value="Exterior Detail — $120+">Exterior Detail — $120+</option>
+            <option value="Interior Detail — $175+">Interior Detail — $175+</option>
+            <option value="Full Detail — $275+">Full Detail — $275+</option>
+            <option value="Ceramic Coating — $750+">Ceramic Coating — $750+</option>
+            <option value="Compound & Polish — $300+">Compound & Polish — $300+</option>
+          </select>
+          <p id="serviceNote" style="font-size:.78rem;color:var(--text-muted);margin-top:.5rem;display:none;line-height:1.6;"></p>
+        </div>
+        <div class="form-group">
+          <label>Add-Ons (select all that apply)</label>
+          <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.25rem;">
+
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" style="width:auto;accent-color:var(--accent);"> Carpet Shampoo / Extraction ($100+)</label>
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" style="width:auto;accent-color:var(--accent);"> Steam Clean & Sanitize ($45+)</label>
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" style="width:auto;accent-color:var(--accent);"> Engine Bay Detail ($75+)</label>
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" style="width:auto;accent-color:var(--accent);"> Headlight Restoration ($49+)</label>
+
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" style="width:auto;accent-color:var(--accent);"> Trim Restoration ($30+)</label>
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;"><input type="checkbox" style="width:auto;accent-color:var(--accent);"> Micro Decontamination ($150+)</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Recurring Service <span style="font-size:.75rem;font-weight:400;color:var(--text-dim);text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:.4rem;margin-top:-.1rem;">Sign up for a recurring schedule and never think about it again. We'll reach out to confirm each upcoming appointment.</p>
+          <p style="font-size:.8rem;color:var(--accent);font-weight:600;margin-bottom:.6rem;">🎉 The more often you book, the bigger your loyalty discount — the higher the frequency, the more you save every visit.</p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;" id="recurringOptions">
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.5rem .6rem;transition:border-color .2s;">
+              <input type="radio" name="recurring" value="Weekly" style="width:auto;accent-color:var(--accent);"> Weekly
+            </label>
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.5rem .6rem;transition:border-color .2s;">
+              <input type="radio" name="recurring" value="Bi-Weekly" style="width:auto;accent-color:var(--accent);"> Bi-Weekly
+            </label>
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.5rem .6rem;transition:border-color .2s;">
+              <input type="radio" name="recurring" value="Monthly" style="width:auto;accent-color:var(--accent);"> Monthly
+            </label>
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.5rem .6rem;transition:border-color .2s;">
+              <input type="radio" name="recurring" value="Bi-Monthly" style="width:auto;accent-color:var(--accent);"> Bi-Monthly
+            </label>
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.5rem .6rem;transition:border-color .2s;">
+              <input type="radio" name="recurring" value="Every 3 Months" style="width:auto;accent-color:var(--accent);"> Every 3 Months
+            </label>
+            <label style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.5rem .6rem;transition:border-color .2s;">
+              <input type="radio" name="recurring" value="Every 6 Months" style="width:auto;accent-color:var(--accent);"> Every 6 Months
+            </label>
+          </div>
+          <button type="button" id="clearRecurring" onclick="document.querySelectorAll('[name=recurring]').forEach(r=>r.checked=false)" style="margin-top:.5rem;background:none;border:none;color:var(--text-dim);font-size:.75rem;cursor:pointer;padding:0;text-decoration:underline;">Clear selection</button>
+        </div>
+        <div class="form-group"><label>Referral (who referred you?)</label><input type="text" name="referral" placeholder="Friend's name (optional)"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Preferred Date</label><input type="date" name="preferred_date"></div>
+          <div class="form-group">
+            <label>Preferred Time</label>
+            <select name="preferred_time"><option>Morning (8am–11am)</option><option>Midday (11am–1pm)</option><option>Afternoon (1pm–4pm)</option><option>Late Afternoon (4pm–6pm)</option></select>
+          </div>
+        </div>
+        <p style="font-size:.78rem;color:var(--text-dim);margin-top:-.75rem;margin-bottom:1.25rem;">⚠️ Preferred date and time are not always guaranteed. We'll confirm the nearest available slot within 24 hours.</p>
+        <div class="form-group">
+          <label>Your General Availability <span style="font-size:.75rem;font-weight:400;color:var(--text-dim);text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <textarea name="availability" placeholder="e.g. Weekdays after 3pm, Saturday mornings, anytime on Sundays..." style="height:80px;"></textarea>
+          <p style="font-size:.78rem;color:var(--text-muted);margin-top:.4rem;line-height:1.6;">If your preferred time doesn't work out, we'll do our best to find something that fits your schedule — we're flexible and happy to work with you. 😊</p>
+        </div>
+        <div class="form-group"><label>Service Location</label><input type="text" name="service_location" placeholder="123 Main St, Norman, OK"></div>
+        <div class="form-group"><label>Additional Notes</label><textarea name="notes" placeholder="Any special instructions, concerns, or questions..."></textarea></div>
+        <button class="submit-btn" type="button" id="bookingSubmitBtn" onclick="validateBooking(event)">REQUEST APPOINTMENT</button>
+        <p style="font-size:.75rem;color:var(--text-dim);margin-top:.75rem;text-align:center;">By submitting, you agree to our <a onclick="showPage('terms')" style="color:var(--accent);cursor:pointer;">Terms & Conditions</a>.</p>
+        </form>
+        <div id="bookingSuccess" style="display:none;text-align:center;padding:3rem 1rem;">
+          <div style="font-size:3rem;margin-bottom:1rem;">✅</div>
+          <div style="font-family:var(--font-display);font-size:1.8rem;letter-spacing:.05em;color:var(--text);margin-bottom:.75rem;">Request Sent!</div>
+          <p style="font-size:.95rem;color:var(--text-muted);line-height:1.7;">We'll review your request and confirm your appointment within 24 hours via text or email.</p>
+        </div>
+      </div>
+
+      <div class="booking-info">
+        <div class="info-card">
+          <h3>Contact Info</h3>
+          <div class="info-item"><div class="info-icon">📞</div><div><div class="info-label">Phone / Text</div><div class="info-val">572-235-2991</div></div></div>
+          <div class="info-item"><div class="info-icon">✉️</div><div><div class="info-label">Email</div><div class="info-val">masonsautodetailingnm@gmail.com</div></div></div>
+          <div class="info-item"><div class="info-icon">📍</div><div><div class="info-label">Service Area</div><div class="info-val">Norman, Moore, Edmond, OKC Metro & surrounding areas</div></div></div>
+          <div class="info-item"><div class="info-icon">🕐</div><div><div class="info-label">Scheduling</div><div class="info-val">Appointments must be scheduled in advance. Reach out by phone/text or use this form. Preferred dates and times are not always guaranteed.</div></div></div>
+        </div>
+        <div class="info-card">
+          <h3>Good to Know</h3>
+          <div style="display:flex;flex-direction:column;gap:.75rem;">
+            <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">✅ No deposit required to schedule.</p>
+            <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">✅ Payment: Cash, <strong style="color:var(--accent);">Zelle</strong>, Venmo, CashApp, Card.</p>
+            <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">✅ We bring all our own supplies and equipment.</p>
+            <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">💧 We need access to your <strong style="color:var(--text);">water and a power outlet</strong> at the service location.</p>
+            <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">🧹 Remove personal belongings before we arrive. <strong style="color:var(--text);">Areas with items left in them will not be cleaned.</strong></p>
+            <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">🎁 Have a referral? Enter their name above for your $20 reward!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-brand">Mason's Mobile Detailing</div><div class="footer-copy">© 2025 Mason's Mobile Detailing. All rights reserved.</div><ul class="footer-links"><li><a onclick="showPage('terms')">Terms</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></footer>
+</div>
+
+<!-- ===== FAQ ===== -->
+<div class="page" id="page-faq">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">Got Questions?</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I book an appointment?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">You can book through our <a onclick="showPage('booking')" style="color:var(--accent);cursor:pointer;">Booking page</a>, or reach out by phone/text at 572-235-2991. We'll confirm within 24 hours.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you come to my location?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">Yes! We come to your home, workplace, or wherever your vehicle is parked. We bring all our own supplies and equipment. We will need access to your <strong>water and a power outlet</strong> at the service location — just let us know where they are when we arrive.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do I need to remove belongings before the appointment?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">Yes. Please remove personal belongings from any areas you'd like cleaned. If personal items are left in a specific area, we will not clean that area. Clearing out ahead of time helps us do our best work.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does a detail take?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">A basic exterior detail takes 1.5–2.5 hours. An interior takes 2–3 hours. A full detail can take 4–6+ hours for larger vehicles. We'll give you a time estimate when you book.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">We accept cash, <strong>Zelle</strong>, Venmo, CashApp, and major credit/debit cards. Payment is due upon completion. No deposit required to book.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What if it rains on my appointment day?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">If rain prevents exterior work, we'll reach out to reschedule at no charge. Interior work can typically proceed regardless of weather.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How does the referral program work?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">It's simple — refer a friend to Mason's Mobile Detailing. When they book their first service, they get <strong>20% off</strong> their total, and you receive <strong>$20 cash</strong>. Just have them mention your name when booking. There's no limit on how many friends you can refer!</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What's your cancellation policy?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">All canceled appointments are subject to a $25 cancellation fee per vehicle. Appointments may be rescheduled with at least 2 hours' notice. No-shows may also be subject to the $25 fee.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is there a satisfaction guarantee?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">Yes. If you're not satisfied, please let us know before we leave and we'll address it. We take pride in our work and won't consider a job done until you're happy.</div></div></div>
+    </div>
+  </div>
+  <footer><div class="footer-brand">Mason's Mobile Detailing</div><div class="footer-copy">© 2025 Mason's Mobile Detailing. All rights reserved.</div><ul class="footer-links"><li><a onclick="showPage('terms')">Terms</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></footer>
+</div>
+
+<!-- ===== TERMS ===== -->
+<div class="page" id="page-terms">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">Legal</div>
+      <h2 class="section-title">Terms & Conditions</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="terms-tabs">
+      <button class="terms-tab active" onclick="switchTerms('simple',this)">Simplified</button>
+      <button class="terms-tab" onclick="switchTerms('full',this)">Full Terms</button>
+    </div>
+
+    <!-- SIMPLIFIED -->
+    <div id="terms-simple">
+      <div class="terms-accordion">
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">📅 Booking & Appointments<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <ul>
+              <li>Each vehicle counts as a separate appointment.</li>
+              <li>You'll receive appointment reminders by email and/or text.</li>
+              <li>You are responsible for providing accurate booking information.</li>
+              <li>You can update appointment details by contacting us.</li>
+              <li>If you're more than 10 minutes late or do not show up, a cancellation fee may apply.</li>
+              <li>Please inspect your vehicle before we leave and notify us immediately of any concerns.</li>
+              <li>A service is considered complete when all selected services have been performed or when the allotted service time has been reached.</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">💳 Payment<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <ul>
+              <li>Payment is due upon completion of service unless otherwise agreed.</li>
+              <li>We accept major credit cards, debit cards, and approved gift cards.</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">🔄 Rescheduling & Cancellation<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <p><strong>Rescheduling:</strong> Appointments may be rescheduled with at least 2 hours' notice. We'll do our best to accommodate your preferred date and time.</p>
+            <p><strong>Cancellation:</strong> Appointments canceled at any time are subject to a $25 cancellation fee per vehicle. No-shows may also be subject to the $25 fee.</p>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">➕ Additional Fees<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <p><strong>Priority Service:</strong> Additional fees may apply for same-day appointments, appointments outside normal business hours, or on days we are normally closed.</p>
+            <p><strong>Travel Fee:</strong> Mobile service may include a travel fee depending on distance. Travel fees will be communicated before service.</p>
+            <p><strong>Special Cleaning Fees:</strong> Additional charges may apply for excessive pet hair, excessive trash or debris, hazardous materials, or conditions requiring substantially more labor.</p>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">🌦️ Weather Policy<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <p>If weather prevents safe or proper service, we will work with you to reschedule. If weather interrupts a service already in progress, we'll coordinate to complete the remaining work.</p>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">🚗 Vehicle Requirements<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <p>Before your appointment, please:</p>
+            <ul>
+              <li>Remove personal belongings, valuables, and important items from your vehicle.</li>
+              <li>Remove child seats if you'd like the area beneath them cleaned.</li>
+              <li>Remove aftermarket accessories you'd like cleaned behind or underneath.</li>
+              <li>Inform us of any vehicle issues that may affect the detailing process.</li>
+              <li>Let us know about hidden compartments or areas requiring special attention.</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">🎯 Service Expectations<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <p>Our goal is to significantly improve the appearance and cleanliness of your vehicle. However:</p>
+            <ul>
+              <li>We do not guarantee complete stain removal.</li>
+              <li>We do not guarantee complete odor removal.</li>
+              <li>We do not guarantee complete pet hair removal.</li>
+              <li>Results vary based on vehicle condition, materials, age, and maintenance history.</li>
+              <li>Some conditions may be permanent and beyond the scope of detailing services.</li>
+            </ul>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">⚠️ Damage & Liability<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <p><strong>Our Responsibility:</strong> We take great care while servicing your vehicle. If damage occurs as a direct result of our negligence, we will work with you toward a fair resolution.</p>
+            <p><strong>Customer Responsibility:</strong> We are not responsible for personal items left inside the vehicle, pre-existing cosmetic/mechanical/electrical issues, or conditions the customer failed to disclose.</p>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">📍 Job Site Requirements<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <p>Customers must provide adequate space around the vehicle, a safe working environment, and permission to be on the property. We reserve the right to refuse or discontinue service if conditions are unsafe or if our team is subjected to threatening or abusive behavior.</p>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">📸 Photos & Recordings<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <p>We may photograph vehicles before and after service for quality control and marketing purposes. We will never sell customer photographs to third parties.</p>
+          </div></div>
+        </div>
+
+        <div class="terms-acc-item">
+          <div class="terms-acc-q" onclick="toggleTermsAcc(this)">🏛️ Legal Terms<span class="terms-acc-chevron">▾</span></div>
+          <div class="terms-acc-body"><div class="terms-acc-inner">
+            <p>Oklahoma law governs any disputes arising from our services. These terms may be updated from time to time. By scheduling service with Mason's Mobile Detailing, you acknowledge that you have read and agree to these terms.</p>
+          </div></div>
+        </div>
+
+      </div>
+      <p style="font-size:.8rem;color:var(--text-dim);margin-top:1.5rem;">Last updated: June 2025 — Mason's Mobile Detailing</p>
+    </div>
+
+    <!-- FULL TERMS -->
+    <div id="terms-full" style="display:none;">
+      <div class="terms-body">
+        <h2>1. Booking & Appointments</h2>
+        <p>1.1 Each vehicle scheduled constitutes a separate appointment, and all terms herein apply individually to each vehicle booked.</p>
+        <p>1.2 Appointment confirmations and reminders may be sent via email, SMS, or phone call, at our discretion. Customers are responsible for providing accurate contact and scheduling information.</p>
+        <p>1.3 Customers may update appointment details by contacting Mason's Mobile Detailing through our designated communication channels.</p>
+        <p>1.4 If a customer arrives more than 10 minutes late for a scheduled appointment or fails to appear, Mason's Mobile Detailing reserves the right to assess a cancellation fee.</p>
+        <p>1.5 Prior to completion of service, customers are encouraged to inspect their vehicle and immediately report any concerns. A service is deemed complete when either all selected detailing services have been performed or the allocated service time for the chosen package has been reached.</p>
+
+        <h2>2. Payment</h2>
+        <p>2.1 Payment is required upon completion of the service, unless otherwise expressly agreed in writing.</p>
+        <p>2.2 We accept major credit cards, debit cards, and approved gift cards.</p>
+        <p>2.3 Customers are responsible for ensuring their payment method is valid and authorized.</p>
+
+        <h2>3. Rescheduling & Cancellation</h2>
+        <p><strong>3.1 Rescheduling</strong></p>
+        <p>3.1.1 Appointments may be rescheduled with a minimum of 2 hours' notice.</p>
+        <p>3.1.2 Mason's Mobile Detailing will make reasonable efforts to accommodate customer preferences when rescheduling.</p>
+        <p><strong>3.2 Cancellation</strong></p>
+        <p>3.2.1 Cancellations may be made at any time; however, all canceled appointments are subject to a $25 cancellation fee per vehicle.</p>
+        <p>3.2.2 Failure to show for a scheduled appointment without prior notice may also result in a $25 fee.</p>
+        <p>3.2.3 Cancellation fees may be waived at the discretion of Mason's Mobile Detailing under extenuating circumstances.</p>
+
+        <h2>4. Additional Fees</h2>
+        <p><strong>4.1 Priority Service</strong> — Additional fees may apply for same-day service, appointments outside normal business hours, or appointments on holidays or days the business is typically closed.</p>
+        <p><strong>4.2 Travel Fees</strong> — Mobile detailing services may incur a travel fee. Travel fees vary by distance and will be communicated to the customer prior to the appointment.</p>
+        <p><strong>4.3 Special Cleaning Fees</strong> — Additional charges may apply for excessive pet hair, significant accumulation of trash or debris, hazardous or biohazard materials, or conditions requiring substantially more labor than a standard detailing service.</p>
+
+        <h2>5. Weather Policy</h2>
+        <p>5.1 If weather conditions prevent safe or effective performance of services, Mason's Mobile Detailing will work with customers to determine a mutually convenient reschedule date and time.</p>
+        <p>5.2 If a service is interrupted by weather after it has begun, Mason's Mobile Detailing will coordinate with the customer to complete any unfinished portions of the service at a later time.</p>
+
+        <h2>6. Vehicle Preparation & Customer Responsibilities</h2>
+        <p>6.1 Prior to the scheduled appointment, customers should: remove personal belongings and valuables; remove child seats if the area beneath them is to be cleaned; remove aftermarket accessories to be detailed; notify Mason's Mobile Detailing of any vehicle issues that may affect the process; and provide information regarding hidden compartments or areas requiring extra care.</p>
+        <p>6.2 Customers understand that detailing services cannot address pre-existing mechanical or cosmetic issues unless otherwise specified.</p>
+
+        <h2>7. Service Limitations & Expectations</h2>
+        <p>7.1 Mason's Mobile Detailing aims to improve the cleanliness and appearance of vehicles but cannot guarantee complete removal of stains, odors, pet hair, or damage.</p>
+        <p>7.2 Results are affected by vehicle condition, age, material type, extent of wear, maintenance history, and prior cleaning.</p>
+        <p>7.3 Certain conditions may be permanent or beyond the scope of standard detailing services.</p>
+
+        <h2>8. Damage & Liability</h2>
+        <p>8.1 Mason's Mobile Detailing will exercise reasonable care while performing detailing services. Any damage directly caused by our negligence will be addressed in good faith toward a fair resolution.</p>
+        <p>8.2 Customers are responsible for removing personal items prior to service. Mason's Mobile Detailing is not responsible for pre-existing cosmetic, mechanical, or electrical issues. Customers must disclose any conditions that may affect service.</p>
+
+        <h2>9. Job Site Requirements</h2>
+        <p>9.1 Customers must provide adequate space around the vehicle, permission to perform services on the property if not owned by the customer, and a safe and secure environment for the service team.</p>
+        <p>9.2 Mason's Mobile Detailing reserves the right to refuse or discontinue service if the site is unsafe or if staff are subjected to threatening, abusive, or inappropriate behavior.</p>
+
+        <h2>10. Photos & Recordings</h2>
+        <p>10.1 Mason's Mobile Detailing may photograph vehicles before and after service for quality control and marketing purposes. Customer consent is implied unless explicitly revoked. Photographs will not be sold to third parties.</p>
+
+        <h2>11. Health & Safety</h2>
+        <p>11.1 Customers must inform Mason's Mobile Detailing of any hazards including hazardous or biohazard materials, pest infestations, or any condition posing a risk to health or safety. Services may be declined or discontinued if safety concerns are identified.</p>
+
+        <h2>12. Governing Law & Dispute Resolution</h2>
+        <p>12.1 These terms are governed by the laws of the State of Oklahoma.</p>
+        <p>12.2 Any dispute arising from services provided will be resolved under Oklahoma law.</p>
+        <p>12.3 Mason's Mobile Detailing reserves the right to update these terms at any time, and continued use of services constitutes acceptance of the updated terms.</p>
+
+        <p class="terms-updated">Last updated: June 2025 — Mason's Mobile Detailing</p>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-brand">Mason's Mobile Detailing</div><div class="footer-copy">© 2025 Mason's Mobile Detailing. All rights reserved.</div><ul class="footer-links"><li><a onclick="showPage('terms')">Terms</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></footer>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div class="page" id="page-contact">
+  <div class="section">
+    <div class="section-header">
+      <div class="section-tag">Get in Touch</div>
+      <h2 class="section-title">Contact Us</h2>
+      <div class="divider"></div>
+      <p class="section-sub">Have a question or want a custom quote? We're happy to help.</p>
+    </div>
+    <div class="contact-layout">
+      <div>
+        <div class="contact-item"><div class="contact-icon-wrap">📞</div><div><div class="contact-label">Phone / Text</div><div class="contact-val">572-235-2991</div><div style="font-size:.8rem;color:var(--text-dim);margin-top:.2rem;">Call or text — we respond quickly!</div></div></div>
+        <div class="contact-item"><div class="contact-icon-wrap">✉️</div><div><div class="contact-label">Email</div>            <div class="contact-val"><a href="mailto:masonsautodetailingnm@gmail.com">masonsautodetailingnm@gmail.com</a></div></div></div>
+        <div class="contact-item"><div class="contact-icon-wrap">📍</div><div><div class="contact-label">Service Area</div><div class="contact-val">Norman, Moore, Edmond, Midwest City, OKC Metro & surrounding areas</div></div></div>
+        <div class="contact-item"><div class="contact-icon-wrap">🕐</div><div><div class="contact-label">Scheduling</div><div class="contact-val">Appointments by request — availability varies. Preferred dates and times are not always guaranteed.</div></div></div>
+        <div style="margin-top:1.5rem;"><div class="contact-label" style="margin-bottom:.75rem;">Follow Us</div><div class="social-links"><a href="#" target="_blank" class="social-link">📘 Facebook</a><a href="#" target="_blank" class="social-link">📸 Instagram</a><a href="#" target="_blank" class="social-link">⭐ Google</a><a href="#" target="_blank" class="social-link">📱 TikTok</a></div></div>
+      </div>
+      <div class="contact-form">
+        <h3>Send a Message</h3>
+        <div data-fs-success style="display:none;text-align:center;padding:2rem 1rem;">
+          <div style="font-size:2.5rem;margin-bottom:.75rem;">✅</div>
+          <div style="font-family:var(--font-display);font-size:1.6rem;letter-spacing:.05em;color:var(--text);margin-bottom:.5rem;">Message Sent!</div>
+          <p style="font-size:.9rem;color:var(--text-muted);">We'll get back to you as soon as possible.</p>
+        </div>
+        <div data-fs-error style="font-size:.85rem;color:#e05c5c;margin-bottom:1rem;display:none;"></div>
+        <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group"><label>Name</label><input type="text" name="name" placeholder="Your name"></div>
+          <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="(572) 555-0000"></div>
+        </div>
+        <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="you@example.com"></div>
+        <div class="form-group"><label>Subject</label><select name="subject"><option>General Question</option><option>Request a Quote</option><option>Existing Appointment</option><option>Referral Program</option><option>Feedback / Complaint</option><option>Other</option></select></div>
+        <div class="form-group"><label>Message</label><textarea name="message" placeholder="How can we help you?"></textarea></div>
+        <button class="submit-btn" type="button" id="contactSubmitBtn" onclick="validateContact(event)">SEND MESSAGE</button>
+        </form>
+        <div id="contactSuccess" style="display:none;text-align:center;padding:2rem 1rem;">
+          <div style="font-size:2.5rem;margin-bottom:.75rem;">✅</div>
+          <div style="font-family:var(--font-display);font-size:1.6rem;letter-spacing:.05em;color:var(--text);margin-bottom:.5rem;">Message Sent!</div>
+          <p style="font-size:.9rem;color:var(--text-muted);">We'll get back to you as soon as possible.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer><div class="footer-brand">Mason's Mobile Detailing</div><div class="footer-copy">© 2025 Mason's Mobile Detailing. All rights reserved.</div><ul class="footer-links"><li><a onclick="showPage('terms')">Terms</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></footer>
+</div>
+
+<div class="toast" id="toast"></div>
+<input type="file" class="input-hidden" id="fileInput" accept="image/*" onchange="handleImageUpload(event)">
+<input type="file" class="input-hidden" id="reviewFileInput" accept="image/*" onchange="handleReviewImageUpload(event)">
+
+<script>
+// ===== REVIEWS DATA =====
+const reviewsData = [
+  { name:'Eva P.', date:'May 2025', stars:5, service:'Full Detail', text:'I have a Kia and honestly wasn\'t sure what to expect — Mason made it look better than the day I drove it off the lot. Every inch was spotless inside and out. So worth it.', img:'https://i.postimg.cc/mZKHbmd4/kia.jpg' },
+  { name:'Malachi M.', date:'April 2025', stars:5, service:'Exterior Detail + Ceramic Coating', text:'My 300 needed some serious love and Mason delivered. The ceramic coating has it looking absolutely glossy — like a mirror on wheels. People keep asking what I did to it.', img:'https://i.postimg.cc/KcCMZ006/CE406FFD-5FAD-4DF4-B279-95559C3EC49F.jpg' },
+  { name:'Maddox M.', date:'March 2025', stars:5, service:'Exterior Detail', text:'This car has been sitting in my garage for almost a year — I was honestly a little embarrassed by how it looked. Mason came out and did the exterior detail and I was blown away. Seeing my project car that clean again was something else. Every panel, every wheel, every piece of trim looked absolutely dialed in. Couldn\'t have asked for better results.', imgs:['https://i.postimg.cc/02G9vPkL/IMG-8283.jpg','https://i.postimg.cc/BvzrHQc1/IMG-8272.jpg','https://i.postimg.cc/BvzrHQcP/IMG-8274.jpg'], img:null },
+  { name:'Kayla R.', date:'February 2025', stars:5, service:'Full Detail + Engine Bay', text:'Had the full detail plus engine bay done. The engine bay looked better than when I bought the truck. Mason is clearly passionate about what he does.', img:null },
+  { name:'Jordan S.', date:'January 2025', stars:5, service:'Exterior Detail', text:'Came to my office while I worked. By the time I got out the car looked showroom fresh. Best money I\'ve spent in a while. Will definitely be a regular customer.', img:null },
+  { name:'Brittany H.', date:'December 2024', stars:5, service:'Interior + Steam Clean', text:'I have two dogs. Mason got every single hair out and steam cleaned everything. The car smells completely clean now. I didn\'t think it was possible — amazing.', img:null },
+];
+
+let activeReviewSlot = null;
+
+function buildReviews() {
+  const grid = document.getElementById('reviewsGrid');
+  grid.innerHTML = '';
+  reviewsData.forEach(function(r, i) {
+    var stars = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
+    var card = document.createElement('div');
+    card.className = 'review-card';
+    var imgHtml = '';
+    if (r.imgs && r.imgs.length) {
+      var cid = 'rc' + i;
+      var slides = r.imgs.map(function(src) {
+        return '<div style="min-width:100%;height:100%;flex-shrink:0;"><img src="' + src + '" alt="Service photo" style="width:100%;height:100%;object-fit:cover;display:block;"></div>';
+      }).join('');
+      var dots = r.imgs.map(function(_, di) {
+        var bg = di === 0 ? '#fff' : 'rgba(255,255,255,.4)';
+        return '<div onclick="miniCarouselGoTo(\'' + cid + '\',' + di + ',' + r.imgs.length + ')" style="width:6px;height:6px;border-radius:50%;background:' + bg + ';cursor:pointer;transition:background .3s;"></div>';
+      }).join('');
+      var controls = r.imgs.length > 1
+        ? '<button onclick="miniCarousel(\'' + cid + '\',-1)" style="position:absolute;left:.5rem;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.55);border:none;color:#fff;font-size:1.2rem;width:30px;height:30px;border-radius:50%;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;">&#8249;</button>'
+        + '<button onclick="miniCarousel(\'' + cid + '\',1)" style="position:absolute;right:.5rem;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.55);border:none;color:#fff;font-size:1.2rem;width:30px;height:30px;border-radius:50%;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;line-height:1;padding:0;">&#8250;</button>'
+        + '<div id="' + cid + '-dots" style="position:absolute;bottom:.5rem;left:50%;transform:translateX(-50%);display:flex;gap:.3rem;z-index:2;">' + dots + '</div>'
+        : '';
+      imgHtml = '<div style="position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#111;">'
+        + '<div id="' + cid + '-track" style="display:flex;height:100%;transition:transform .4s ease;">' + slides + '</div>'
+        + controls + '</div>';
+    } else if (r.img === 'placeholder') {
+      imgHtml = '<div class="review-img" style="cursor:default;"></div>';
+    } else if (r.img) {
+      imgHtml = '<div class="review-img" style="cursor:default;"><img src="' + r.img + '" alt="Service photo"></div>';
+    }
+    card.innerHTML = imgHtml
+      + '<div class="review-body">'
+      + '<div class="review-quote">"</div>'
+      + '<div class="review-stars">' + stars + '</div>'
+      + '<div class="review-text">' + r.text + '</div>'
+      + '<div class="review-author">' + r.name + '</div>'
+      + '<div class="review-date">' + r.date + '</div>'
+      + '<div class="review-service-tag">' + r.service + '</div>'
+      + '</div>';
+    grid.appendChild(card);
+  });
+}
+
+function miniCarouselGoTo(cid, n, total) {
+  const track = document.getElementById(cid + '-track');
+  const dots = document.getElementById(cid + '-dots');
+  if (!track) return;
+  track._cur = n;
+  track.style.transform = 'translateX(-' + n * 100 + '%)';
+  if (dots) dots.querySelectorAll('div').forEach((d, i) => d.style.background = i === n ? '#fff' : 'rgba(255,255,255,.4)');
+}
+function miniCarousel(cid, dir) {
+  const track = document.getElementById(cid + '-track');
+  if (!track) return;
+  const total = track.children.length;
+  const cur = ((track._cur || 0) + dir + total) % total;
+  miniCarouselGoTo(cid, cur, total);
+}
+function triggerReviewUpload(i) {
+  activeReviewSlot = i;
+  document.getElementById('reviewFileInput').click();
+}
+
+function handleReviewImageUpload(e) {
+  const file = e.target.files[0];
+  if (!file || activeReviewSlot === null) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    reviewsData[activeReviewSlot].img = ev.target.result;
+    buildReviews();
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+// ===== GALLERY =====
+const gallerySlots = [
+  { title:'Exterior Detail', sub:'Sedan — Full exterior', id:'g1' },
+  { title:'Interior Detail', sub:'SUV — Deep clean', id:'g2' },
+  { title:'Full Detail', sub:'Truck — Complete package', id:'g3' },
+  { title:'Ceramic Coating', sub:'Paint correction + ceramic', id:'g4' },
+  { title:'Engine Bay', sub:'Before & after degrease', id:'g5' },
+  { title:'Carpet Extraction', sub:'Minivan — Shampoo & extract', id:'g6' },
+];
+let activeUploadSlot = null;
+
+function buildGallery() {
+  const grid = document.getElementById('galleryGrid');
+  grid.innerHTML = '';
+  gallerySlots.forEach(slot => {
+    const card = document.createElement('div');
+    card.className = 'ba-card';
+    card.innerHTML = `
+      <div class="ba-images">
+        <div class="ba-img-slot" onclick="triggerUpload('${slot.id}-before')" id="slot-${slot.id}-before">
+          <span class="ba-label before">Before</span>
+          <div class="upload-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Upload</span></div>
+        </div>
+        <div class="ba-img-slot" onclick="triggerUpload('${slot.id}-after')" id="slot-${slot.id}-after">
+          <span class="ba-label after">After</span>
+          <div class="upload-placeholder"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Upload</span></div>
+        </div>
+      </div>
+      <div class="ba-card-info">
+        <div><div class="ba-card-title">${slot.title}</div><div class="ba-card-sub">${slot.sub}</div></div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function triggerUpload(slotId) { activeUploadSlot = slotId; document.getElementById('fileInput').click(); }
+function handleImageUpload(e) {
+  const file = e.target.files[0];
+  if (!file || !activeUploadSlot) return;
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    const slot = document.getElementById('slot-' + activeUploadSlot);
+    if (!slot) return;
+    slot.querySelector('.upload-placeholder').style.display = 'none';
+    let img = slot.querySelector('img');
+    if (!img) { img = document.createElement('img'); slot.appendChild(img); }
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+// ===== NAVIGATION =====
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const page = document.getElementById('page-' + pageId);
+  if (page) { page.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    if (a.getAttribute('onclick') && a.getAttribute('onclick').includes(`'${pageId}'`)) a.classList.add('active');
+  });
+  document.getElementById('navLinks').classList.remove('open');
+}
+function toggleMenu() { document.getElementById('navLinks').classList.toggle('open'); }
+
+// ===== FAQ =====
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// ===== TERMS ACCORDION =====
+function toggleTermsAcc(el) {
+  const item = el.closest('.terms-acc-item');
+  item.classList.toggle('open');
+}
+function switchTerms(tab, btn) {
+  document.getElementById('terms-simple').style.display = tab === 'simple' ? 'block' : 'none';
+  document.getElementById('terms-full').style.display = tab === 'full' ? 'block' : 'none';
+  document.querySelectorAll('.terms-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ===== FORMS =====
+function showServiceNote(sel) {
+  const note = document.getElementById('serviceNote');
+  const warnings = {
+    'Exterior Detail — $120+': '⏱️ Time estimate: approximately 1 hour for most vehicles (may vary slightly by size and condition).',
+    'Interior Detail — $175+': '⏱️ Time estimate: approximately 1.5 hours for most vehicles (may vary slightly by size and condition).',
+    'Full Detail — $275+': '⏱️ Time estimate: approximately 2.5 hours for most vehicles — that\'s the exterior (~1 hr) plus interior (~1.5 hrs) combined. May vary by vehicle size and condition.',
+    'Ceramic Coating — $750+': 'Just so you know — ceramic coating works by bonding to and protecting your existing paint. Unfortunately we don\'t offer paint respray or bodywork, so areas with rust, bare metal, missing paint, or damaged clear coat won\'t be covered by the coating. If you\'re unsure about your paint condition, just mention it in the notes and we\'ll take a look when we arrive!',
+    'Compound & Polish — $300+': 'Just so you know — compound and polish works on the surface of your existing clear coat to remove light scratches and oxidation. Unfortunately we don\'t offer paint respray or bodywork, so areas where the clear coat or paint is gone, rusted, or has bare metal won\'t be restorable through this service. If you have questions about what\'s fixable, feel free to mention it in the notes!'
+  };
+  const msg = warnings[sel.value];
+  if (msg) { note.textContent = msg; note.style.display = 'block'; }
+  else { note.style.display = 'none'; }
+}
+async function handleBookingSubmit(e) {}
+async function handleContactSubmit(e) {}
+
+function submitToFormspree(form, btn, originalText) {
+  btn.disabled = true;
+  btn.textContent = 'SUBMITTING…';
+  const data = new FormData(form);
+  fetch('https://formspree.io/f/xwvjblae', {
+    method: 'POST',
+    body: data,
+    headers: { 'Accept': 'application/json' }
+  }).then(r => {
+    if (r.ok) {
+      const success = form.parentElement.querySelector('[data-fs-success]');
+      if (success) { form.style.display = 'none'; success.style.display = 'block'; }
+    } else {
+      btn.disabled = false;
+      btn.textContent = originalText;
+      alert('Something went wrong. Please try again.');
+    }
+  }).catch(() => {
+    btn.disabled = false;
+    btn.textContent = originalText;
+    alert('Network error. Please try again.');
+  });
+}
+
+function validateBooking(e) {
+  e.preventDefault();
+  const btn = document.getElementById('bookingSubmitBtn');
+  if (btn.disabled) return false;
+  const form = document.getElementById('bookingForm');
+  const required = ['first_name','phone','email','vehicle','vehicle_size','preferred_date','preferred_time','service_location'];
+  const missing = required.map(n => form.querySelector('[name="' + n + '"]')).filter(f => !f || !f.value.trim());
+  if (missing.length) {
+    missing.forEach(f => {
+      if (f) {
+        f.style.outline = '2px solid #e05c5c';
+        f.addEventListener('input', () => f.style.outline = '', {once:true});
+        f.addEventListener('change', () => f.style.outline = '', {once:true});
+      }
+    });
+    missing[0].scrollIntoView({behavior:'smooth', block:'center'});
+    return false;
+  }
+  submitToFormspree(form, btn, 'REQUEST APPOINTMENT');
+  return false;
+}
+
+function validateContact(e) {
+  e.preventDefault();
+  const btn = document.getElementById('contactSubmitBtn');
+  if (btn.disabled) return false;
+  const form = btn.closest('form');
+  const required = ['name','phone','email','message'];
+  const missing = required.map(n => form.querySelector('[name="' + n + '"]')).filter(f => !f || !f.value.trim());
+  if (missing.length) {
+    missing.forEach(f => {
+      if (f) {
+        f.style.outline = '2px solid #e05c5c';
+        f.addEventListener('input', () => f.style.outline = '', {once:true});
+      }
+    });
+    return false;
+  }
+  submitToFormspree(form, btn, 'SEND MESSAGE');
+  return false;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ===== INIT =====
+buildGallery();
+buildReviews();
+setTimeout(()=>{const r=document.getElementById('reviewsGrid');const g=document.getElementById('reviewsGridGallery');if(r&&g){g.innerHTML=r.innerHTML;}},500);</script>
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const heroImage = document.getElementById('heroImage');
+  const heroUpload = document.getElementById('heroImageUpload');
+
+  if (!heroImage || !heroUpload) return;
+
+  const savedImage = localStorage.getItem('mmd_hero_image');
+  if (savedImage) {
+    heroImage.src = savedImage;
+  }
+
+  heroUpload.addEventListener('change', function (e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const imageData = event.target.result;
+      heroImage.src = imageData;
+      localStorage.setItem('mmd_hero_image', imageData);
+    };
+    reader.readAsDataURL(file);
+  });
+});
+</script>
+
+</body>
+
+
+</html>
