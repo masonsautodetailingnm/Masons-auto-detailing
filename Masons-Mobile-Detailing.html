@@ -123,6 +123,8 @@
 
   /* PAGES */
   .page { display:none; padding-top:64px; min-height:100vh; }
+  .page.promo-visible { padding-top:calc(64px + 44px); }
+  #promoBar { position:fixed; top:64px; left:0; right:0; z-index:999; }
   .page.active { display:block; }
 
   /* HERO */
@@ -334,6 +336,8 @@
     .terms-tabs { flex-wrap:wrap; }
     .social-links { justify-content:center; }
     nav { padding:0 1rem; }
+    #promoBar { flex-direction:column; gap:.3rem; padding:.6rem 2.5rem; }
+    #promoBar span { font-size:.78rem; }
     footer { padding:1.25rem 1rem; }
     .footer-links { gap:1rem; }
     .service-card-inner { padding:1.5rem; }
@@ -377,6 +381,7 @@
   .float-book-btn { display: none; }
 }
 </style>
+  <script src="https://elfsightcdn.com/platform.js" async></script>
 </head>
 <body>
 
@@ -390,13 +395,30 @@
     <li><a onclick="showPage('reviews')">Reviews</a></li>
     <li><a onclick="showPage('faq')">FAQ</a></li>
     <li><a onclick="showPage('contact')">Contact</a></li>
+    <li><a onclick="showPage('booking')">Get a Free Quote</a></li>
     <li><a class="nav-cta" href="https://square.site/appointments/buyer/widget/eppsjdas7ecbr8/LT8WP8DRYYP1Y" target="_blank">Book Now</a></li>
     <li><a class="nav-cta" href="tel:5722352991" data-call-btn style="background:transparent;border:1px solid rgba(232,184,75,.4);color:var(--accent);">📞 Call</a></li>
   </ul>
   <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- ===== HOME ===== -->
+<!-- FATHER'S DAY PROMO BANNER -->
+<div id="promoBar" style="background:linear-gradient(90deg,#1a1200,#2a1e00,#1a1200);border-bottom:1px solid rgba(232,184,75,.4);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;position:relative;flex-wrap:wrap;text-align:center;">
+  <span style="font-size:1.1rem;">👔</span>
+  <span style="font-family:var(--font-condensed);font-size:.9rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);">Father's Day Special</span>
+  <span style="font-family:var(--font-condensed);font-size:.88rem;font-weight:600;color:var(--text);letter-spacing:.04em;">— 10% Off All Services through June 24th</span>
+  <span style="font-size:.75rem;color:var(--text-dim);font-style:italic;">Discount applied after booking · No booking fee</span>
+  <button onclick="sessionStorage.setItem('promoDismissed','1');document.getElementById('promoBar').style.display='none';document.querySelectorAll('.page').forEach(p=>p.classList.remove('promo-visible'));" style="position:absolute;right:1rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-dim);font-size:1.1rem;cursor:pointer;line-height:1;padding:.25rem;">✕</button>
+</div>
+<script>
+  if(sessionStorage.getItem('promoDismissed')) {
+    document.getElementById('promoBar').style.display='none';
+  } else {
+    document.querySelectorAll('.page').forEach(p=>p.classList.add('promo-visible'));
+  }
+</script>
+
+
 <div class="page active" id="page-home">
   <section class="hero">
     <!-- Replace the src below with a real video or image URL -->
@@ -484,8 +506,8 @@
         <div style="width:4rem;height:4rem;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;box-shadow:0 0 24px rgba(232,184,75,.3);">
           <span style="font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:#000;">1</span>
         </div>
-        <div style="font-family:var(--font-condensed);font-size:1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-bottom:.5rem;">Book Online</div>
-        <div style="font-size:.85rem;color:var(--text-muted);line-height:1.6;">Fill out the booking form in minutes. Pick your service, drop your address, and we'll confirm within 24 hours.</div>
+        <div style="font-family:var(--font-condensed);font-size:1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--text);margin-bottom:.5rem;">Get a Free Quote</div>
+        <div style="font-size:.85rem;color:var(--text-muted);line-height:1.6;">Fill out the quote form in minutes — pick your service, tell us about your vehicle, and we'll send a quote within 24 hours.</div>
       </div>
       <!-- Step 2 -->
       <div style="text-align:center;position:relative;z-index:1;">
@@ -504,6 +526,17 @@
         <div style="font-size:.85rem;color:var(--text-muted);line-height:1.6;">Sit back while we handle it. When we're done, your car looks showroom fresh — you didn't even have to leave.</div>
       </div>
     </div>
+  </div>
+
+
+  <!-- ELFSIGHT GOOGLE REVIEWS -->
+  <div class="section" style="padding-top:3rem;padding-bottom:3rem;">
+    <div class="section-header" style="margin-bottom:2rem;">
+      <div class="section-tag">What Customers Say</div>
+      <h2 class="section-title">Google Reviews</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="elfsight-app-8bc51072-04c0-46a6-9610-91d0e30941a0" data-elfsight-app-lazy></div>
   </div>
 
   <!-- WHY US STRIP -->
@@ -1030,14 +1063,14 @@
 </div><div class="ba-card-info"><div class="ba-card-title">Chrysler 300 Transformation</div></div></div>
 
 <div class="ba-card"><div class="ba-images">
-<div class="ba-img-slot" style="background:var(--bg3);display:flex;align-items:center;justify-content:center;"><span class="ba-label before">Before</span><span style="font-size:.75rem;color:var(--text-dim);font-family:var(--font-condensed);letter-spacing:.08em;">Photo Coming Soon</span></div>
-<div class="ba-img-slot" style="background:var(--bg3);display:flex;align-items:center;justify-content:center;"><span class="ba-label after">After</span><span style="font-size:.75rem;color:var(--text-dim);font-family:var(--font-condensed);letter-spacing:.08em;">Photo Coming Soon</span></div>
-</div><div class="ba-card-info"><div class="ba-card-title">Coming Soon</div></div></div>
+<div class="ba-img-slot"><img src="https://i.postimg.cc/CLVVvVfX/IMG-8345.jpg" alt="Before"><span class="ba-label before">Before</span></div>
+<div class="ba-img-slot"><img src="https://i.postimg.cc/QxkZwnpR/IMG-8356.jpg" alt="After"><span class="ba-label after">After</span></div>
+</div><div class="ba-card-info"><div class="ba-card-title">Detail Transformation</div></div></div>
 
 <div class="ba-card"><div class="ba-images">
-<div class="ba-img-slot" style="background:var(--bg3);display:flex;align-items:center;justify-content:center;"><span class="ba-label before">Before</span><span style="font-size:.75rem;color:var(--text-dim);font-family:var(--font-condensed);letter-spacing:.08em;">Photo Coming Soon</span></div>
-<div class="ba-img-slot" style="background:var(--bg3);display:flex;align-items:center;justify-content:center;"><span class="ba-label after">After</span><span style="font-size:.75rem;color:var(--text-dim);font-family:var(--font-condensed);letter-spacing:.08em;">Photo Coming Soon</span></div>
-</div><div class="ba-card-info"><div class="ba-card-title">Coming Soon</div></div></div>
+<div class="ba-img-slot"><img src="https://i.postimg.cc/wTcYZbhb/IMG-8346.jpg" alt="Before"><span class="ba-label before">Before</span></div>
+<div class="ba-img-slot"><img src="https://i.postimg.cc/ncYfgwvS/IMG-8357.jpg" alt="After"><span class="ba-label after">After</span></div>
+</div><div class="ba-card-info"><div class="ba-card-title">Detail Transformation</div></div></div>
 </div>
 
   </div>
@@ -1161,6 +1194,16 @@
       <a href="https://g.page/r/CbOOxURlVIoXEBM/review" target="_blank" class="btn-primary">⭐ Leave a Google Review</a>
     </div>
   </div>
+
+  <!-- ELFSIGHT GOOGLE REVIEWS -->
+  <div class="section" style="padding-top:3rem;padding-bottom:3rem;">
+    <div class="section-header" style="margin-bottom:2rem;">
+      <div class="section-tag">What Customers Say</div>
+      <h2 class="section-title">Google Reviews</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="elfsight-app-8bc51072-04c0-46a6-9610-91d0e30941a0" data-elfsight-app-lazy></div>
+  </div>
   <footer><div class="footer-brand">Mason's Mobile Detailing</div><div class="footer-copy">© 2026 Mason's Mobile Detailing. All rights reserved.</div><ul class="footer-links"><li><a onclick="showPage('terms')">Terms</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></footer>
 </div>
 
@@ -1169,9 +1212,9 @@
   <div class="section">
     <div class="section-header">
       <div class="section-tag">Schedule Service</div>
-      <h2 class="section-title">Book a Detail</h2>
+      <h2 class="section-title">Obtain a Quote</h2>
       <div class="divider"></div>
-      <p class="section-sub">Fill out the form below and we'll confirm your appointment within 24 hours.</p>
+      <p class="section-sub">Fill out the form below and we'll get back to you with a quote within 24 hours.</p>
     </div>
     <div class="booking-layout">
       <div class="booking-form" id="bookingFormWrap">
@@ -1236,7 +1279,7 @@
         </div>
         <div class="form-group">
           <label>Recurring Service <span style="font-size:.75rem;font-weight:400;color:var(--text-dim);text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:.4rem;margin-top:-.1rem;">Sign up for a recurring schedule and never think about it again. We'll reach out to confirm each upcoming appointment.</p>
+          <p style="font-size:.78rem;color:var(--text-dim);margin-bottom:.4rem;margin-top:-.1rem;">Sign up for a recurring schedule and never think about it again. We'll reach out to confirm each upcoming visit.</p>
           <p style="font-size:.8rem;color:var(--accent);font-weight:600;margin-bottom:.6rem;">🎉 The more often you book, the bigger your loyalty discount — the higher the frequency, the more you save every visit.</p>
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;" id="recurringOptions">
             <label style="display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--text-muted);cursor:pointer;font-family:var(--font-body);text-transform:none;letter-spacing:0;font-weight:400;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.5rem .6rem;transition:border-color .2s;">
@@ -1260,33 +1303,23 @@
           </div>
           <button type="button" id="clearRecurring" onclick="document.querySelectorAll('[name=recurring]').forEach(r=>r.checked=false)" style="margin-top:.5rem;background:none;border:none;color:var(--text-dim);font-size:.75rem;cursor:pointer;padding:0;text-decoration:underline;">Clear selection</button>
         </div>
-        <div class="form-group"><label>Referral (who referred you?)</label><input type="text" name="referral" placeholder="Friend's name (optional)"></div>
-        <div class="form-row">
-          <div class="form-group"><label>Preferred Date</label><input type="date" name="preferred_date"></div>
-          <div class="form-group">
-            <label>Preferred Time</label>
-            <select name="preferred_time"><option>Morning (8am–11am)</option><option>Midday (11am–1pm)</option><option>Afternoon (1pm–4pm)</option><option>Late Afternoon (4pm–6pm)</option></select>
-          </div>
-        </div>
-        <p style="font-size:.78rem;color:var(--text-dim);margin-top:-.75rem;margin-bottom:1.25rem;">⚠️ Preferred date and time are not always guaranteed. We'll confirm the nearest available slot within 24 hours.</p>
+
         <div class="form-group">
-          <label>Your General Availability <span style="font-size:.75rem;font-weight:400;color:var(--text-dim);text-transform:none;letter-spacing:0;">(optional)</span></label>
-          <textarea name="availability" placeholder="e.g. Weekdays after 3pm, Saturday mornings, anytime on Sundays..." style="height:80px;"></textarea>
-          <p style="font-size:.78rem;color:var(--text-muted);margin-top:.4rem;line-height:1.6;">If your preferred time doesn't work out, we'll do our best to find something that fits your schedule — we're flexible and happy to work with you. 😊</p>
+          <label>Promo / Referral <span style="font-size:.75rem;font-weight:400;color:var(--text-dim);text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <input type="text" name="promo_referral" placeholder="e.g. FATHERSDAY, or a friend's name for the referral reward">
         </div>
-        <div class="form-group"><label>Service Location</label><input type="text" name="service_location" placeholder="123 Main St, Norman, OK"></div>
         <div class="form-group">
           <label>Additional Notes</label>
           <textarea name="notes" placeholder="Any special instructions, concerns, or questions..."></textarea>
-          <p style="font-size:.78rem;color:var(--text-dim);margin-top:.4rem;line-height:1.6;">🚗 Need to book multiple vehicles? Just add details for the second car in the notes section.</p>
+          <p style="font-size:.78rem;color:var(--text-dim);margin-top:.4rem;line-height:1.6;">🚗 Need a quote for multiple vehicles? Just add details for the second car in the notes section.</p>
         </div>
-        <button class="submit-btn" type="button" id="bookingSubmitBtn" onclick="validateBooking(event)">REQUEST APPOINTMENT</button>
+        <button class="submit-btn" type="button" id="bookingSubmitBtn" onclick="validateBooking(event)">REQUEST A QUOTE</button>
         <p style="font-size:.75rem;color:var(--text-dim);margin-top:.75rem;text-align:center;">By submitting, you agree to our <a onclick="showPage('terms')" style="color:var(--accent);cursor:pointer;">Terms & Conditions</a>.</p>
         </form>
         <div id="bookingSuccess" style="display:none;text-align:center;padding:3rem 1rem;">
           <div style="font-size:3.5rem;margin-bottom:1rem;">✅</div>
           <div style="font-family:var(--font-display);font-size:1.8rem;letter-spacing:.05em;color:var(--text);margin-bottom:.75rem;">You're All Set!</div>
-          <p style="font-size:.95rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem;">Your appointment request has been received. We'll reach out within <strong style="color:var(--text);">24 hours</strong> to confirm your date and time via text or email.</p>
+          <p style="font-size:.95rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem;">Your quote request has been received. We'll reach out within <strong style="color:var(--text);">24 hours</strong> with your quote via text or email.</p>
           <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.25rem 1.5rem;text-align:left;max-width:360px;margin:0 auto 1.5rem;">
             <div style="font-family:var(--font-condensed);font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem;">What happens next</div>
             <div style="display:flex;flex-direction:column;gap:.6rem;">
@@ -1302,41 +1335,11 @@
 
       <div class="booking-info">
         <div class="info-card">
-          <h3>Before You Book</h3>
-          <p style="font-size:.8rem;color:var(--text-dim);margin-bottom:1rem;line-height:1.5;">Make sure you're ready so we can do our best work when we arrive.</p>
-          <div style="display:flex;flex-direction:column;gap:.6rem;">
-            <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .75rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);">
-              <span style="font-size:1rem;flex-shrink:0;">💧</span>
-              <div><div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.15rem;">Water access</div><div style="font-size:.78rem;color:var(--text-muted);line-height:1.5;">An outdoor spigot or hose connection near where the car will be parked.</div></div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .75rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);">
-              <span style="font-size:1rem;flex-shrink:0;">🔌</span>
-              <div><div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.15rem;">Power outlet</div><div style="font-size:.78rem;color:var(--text-muted);line-height:1.5;">A standard outlet within reach of the vehicle — garage or exterior outlet works great.</div></div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .75rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);">
-              <span style="font-size:1rem;flex-shrink:0;">🧹</span>
-              <div><div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.15rem;">Remove personal belongings</div><div style="font-size:.78rem;color:var(--text-muted);line-height:1.5;">Clear out any areas you want cleaned. Items left inside will not be moved or cleaned around.</div></div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .75rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);">
-              <span style="font-size:1rem;flex-shrink:0;">🚗</span>
-              <div><div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.15rem;">Clear space around the car</div><div style="font-size:.78rem;color:var(--text-muted);line-height:1.5;">Leave enough room on all sides to open doors and move around freely.</div></div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .75rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);">
-              <span style="font-size:1rem;flex-shrink:0;">🔑</span>
-              <div><div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.15rem;">Have your keys ready</div><div style="font-size:.78rem;color:var(--text-muted);line-height:1.5;">We'll need access to unlock and move the vehicle as needed during the detail.</div></div>
-            </div>
-            <div style="display:flex;align-items:flex-start;gap:.75rem;padding:.65rem .75rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);">
-              <span style="font-size:1rem;flex-shrink:0;">📝</span>
-              <div><div style="font-size:.82rem;font-weight:600;color:var(--text);margin-bottom:.15rem;">Note any concerns</div><div style="font-size:.78rem;color:var(--text-muted);line-height:1.5;">Stains, scratches, or trouble spots? Mention them in the notes field so we come prepared.</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="info-card">
           <h3>Contact Info</h3>
           <div class="info-item"><div class="info-icon">📞</div><div><div class="info-label">Phone / Text</div><div class="info-val">572-235-2991</div></div></div>
           <div class="info-item"><div class="info-icon">✉️</div><div><div class="info-label">Email</div><div class="info-val">masonsautodetailingnm@gmail.com</div></div></div>
           <div class="info-item"><div class="info-icon">📍</div><div><div class="info-label">Service Area</div><div class="info-val">Norman, Moore, Edmond, OKC Metro & surrounding areas</div></div></div>
-          <div class="info-item"><div class="info-icon">🕐</div><div><div class="info-label">Scheduling</div><div class="info-val">Appointments must be scheduled in advance. Reach out by phone/text or use this form. Preferred dates and times are not always guaranteed.</div></div></div>
+          <div class="info-item"><div class="info-icon">🕐</div><div><div class="info-label">Scheduling</div><div class="info-val">Quotes are free — reach out by phone/text or use this form. We'll follow up to schedule once you're ready to book.</div></div></div>
         </div>
         <div class="info-card">
           <h3>Good to Know</h3>
@@ -1346,11 +1349,21 @@
             <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">✅ We bring all our own supplies and equipment.</p>
             <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">💧 We need access to your <strong style="color:var(--text);">water and a power outlet</strong> at the service location.</p>
             <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">🧹 Remove personal belongings before we arrive. <strong style="color:var(--text);">Areas with items left in them will not be cleaned.</strong></p>
-            <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">🎁 Have a referral? Enter their name above for your $20 reward!</p>
+            <p style="font-size:.83rem;color:var(--text-muted);line-height:1.6;">🎁 Have a referral? Mention it in the notes field for your $20 reward!</p>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- ELFSIGHT GOOGLE REVIEWS -->
+  <div class="section" style="padding-top:3rem;padding-bottom:3rem;">
+    <div class="section-header" style="margin-bottom:2rem;">
+      <div class="section-tag">What Customers Say</div>
+      <h2 class="section-title">Google Reviews</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="elfsight-app-8bc51072-04c0-46a6-9610-91d0e30941a0" data-elfsight-app-lazy></div>
   </div>
   <footer><div class="footer-brand">Mason's Mobile Detailing</div><div class="footer-copy">© 2026 Mason's Mobile Detailing. All rights reserved.</div><ul class="footer-links"><li><a onclick="showPage('terms')">Terms</a></li><li><a onclick="showPage('faq')">FAQ</a></li><li><a onclick="showPage('contact')">Contact</a></li></ul></footer>
 </div>
@@ -1364,12 +1377,12 @@
       <div class="divider"></div>
     </div>
     <div class="faq-list">
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you need access to water and power?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">Yes — we bring all our own equipment and supplies, but we do require access to a <strong>water source</strong> (outdoor spigot works great) and a <strong>standard power outlet</strong> at your location. If you're unsure whether your setup will work, just mention it in the booking notes and we'll sort it out.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you need access to water and power?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">Yes — we bring all our own equipment and supplies, but we do require access to a <strong>water source</strong> (outdoor spigot works great) and a <strong>standard power outlet</strong> at your location. If you're unsure whether your setup will work, just mention it in your quote request or give us a call and we'll sort it out.</div></div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">We accept <strong>Cash</strong>, <strong style="color:var(--accent);">Zelle</strong>, <strong>Venmo</strong>, <strong>CashApp</strong>, and major <strong>credit/debit cards</strong>. Payment is due upon completion of the service. No deposit is required to book.</div></div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How far in advance should I book?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">We recommend booking at least <strong>2–3 days in advance</strong> to secure your preferred date and time, especially on weekends. Same-week appointments may be available depending on the schedule — reach out by phone or text at 572-235-2991 for the fastest response on short-notice requests.</div></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I book an appointment?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">You can book through our <a href="https://square.site/appointments/buyer/widget/eppsjdas7ecbr8/LT8WP8DRYYP1Y" target="_blank" style="color:var(--accent);">Booking page</a>, or reach out by phone/text at 572-235-2991. We'll confirm within 24 hours.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I book an appointment?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">Start by getting a free quote through the <a onclick="showPage('booking')" style="color:var(--accent);cursor:pointer;">Get a Free Quote</a> form or by calling/texting 572-235-2991. Once we've confirmed the details and price, use the <a href="https://square.site/appointments/buyer/widget/eppsjdas7ecbr8/LT8WP8DRYYP1Y" target="_blank" style="color:var(--accent);">Book Now</a> button to lock in your date and time — no deposit required.</div></div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do you come to my location?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">Yes! We come to your home, workplace, or wherever your vehicle is parked. We bring all our own supplies and equipment. We will need access to your <strong>water and a power outlet</strong> at the service location — just let us know where they are when we arrive.</div></div></div>
-      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do I need to remove belongings before the appointment?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">Yes. Please remove personal belongings from any areas you'd like cleaned. If personal items are left in a specific area, we will not clean that area. Clearing out ahead of time helps us do our best work.</div></div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do I need to remove belongings before the detail?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">Yes. Please remove personal belongings from any areas you'd like cleaned. If personal items are left in a specific area, we will not clean that area. Clearing out ahead of time helps us do our best work.</div></div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does a detail take?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">A basic exterior detail takes 1.5–2.5 hours. An interior takes 2–3 hours. A full detail can take 4–6+ hours for larger vehicles. We'll give you a time estimate when you book.</div></div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What payment methods do you accept?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">We accept cash, <strong>Zelle</strong>, Venmo, CashApp, and major credit/debit cards. Payment is due upon completion. No deposit required to book.</div></div></div>
       <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What if it rains on my appointment day?<span class="faq-chevron">▾</span></div><div class="faq-a"><div class="faq-a-inner">If rain prevents exterior work, we'll reach out to reschedule at no charge. Interior work can typically proceed regardless of weather.</div></div></div>
@@ -1898,7 +1911,7 @@ function validateBooking(e) {
   const btn = document.getElementById('bookingSubmitBtn');
   if (btn.disabled) return false;
   const form = document.getElementById('bookingForm');
-  const required = ['first_name','phone','email','vehicle','vehicle_size','preferred_date','preferred_time','service_location'];
+  const required = ['first_name','phone','email','vehicle','vehicle_size'];
   const missing = required.map(n => form.querySelector('[name="' + n + '"]')).filter(f => !f || !f.value.trim());
   if (missing.length) {
     missing.forEach(f => {
