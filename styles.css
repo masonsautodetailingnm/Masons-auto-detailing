@@ -1,0 +1,152 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Mason's Mobile Detailing design system.
+ * Dark garage-black surfaces, polished gold accent, condensed display type.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-ring-offset-background: var(--background);
+  --font-display: "Bebas Neue", ui-sans-serif, sans-serif;
+  --font-condensed: "Barlow Condensed", ui-sans-serif, sans-serif;
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --shadow-gold: 0 18px 50px -18px color-mix(in oklab, var(--primary) 55%, transparent);
+  --shadow-panel: 0 24px 60px -30px oklch(0 0 0 / 0.9);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.16 0.006 60);
+  --foreground: oklch(0.96 0.004 90);
+  --card: oklch(0.21 0.007 65);
+  --card-foreground: oklch(0.96 0.004 90);
+  --popover: oklch(0.21 0.007 65);
+  --popover-foreground: oklch(0.96 0.004 90);
+  --primary: oklch(0.81 0.13 84);
+  --primary-foreground: oklch(0.17 0.01 70);
+  --secondary: oklch(0.26 0.008 70);
+  --secondary-foreground: oklch(0.96 0.004 90);
+  --muted: oklch(0.24 0.007 70);
+  --muted-foreground: oklch(0.7 0.012 80);
+  --accent: oklch(0.81 0.13 84);
+  --accent-foreground: oklch(0.17 0.01 70);
+  --destructive: oklch(0.6 0.21 27);
+  --destructive-foreground: oklch(0.97 0.004 90);
+  --border: oklch(0.29 0.008 70);
+  --input: oklch(0.29 0.008 70);
+  --ring: oklch(0.81 0.13 84);
+  --surface: oklch(0.19 0.006 65);
+  --surface-raised: oklch(0.24 0.008 68);
+  --gradient-gold: linear-gradient(
+    120deg,
+    oklch(0.88 0.11 90),
+    oklch(0.78 0.14 78)
+  );
+  --gradient-fade: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in oklab, var(--background) 92%, transparent)
+  );
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+    line-height: 0.95;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+@utility gold-text {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility gold-fill {
+  background: var(--gradient-gold);
+  color: var(--color-primary-foreground);
+}
+
+@utility panel {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rise {
+  animation: rise 0.7s ease both;
+}
