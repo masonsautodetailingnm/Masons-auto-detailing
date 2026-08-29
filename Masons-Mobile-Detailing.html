@@ -1,0 +1,1414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mason's Mobile Detailing | Norman, OK</title>
+    <meta name="description" content="Professional mobile detailing in Norman, OK — we come to you. Interior, exterior, full details and ceramic coating. Free same-day quotes — call 572-235-2991.">
+    <meta name="author" content="Mason's Mobile Detailing">
+    <meta property="og:title" content="Mason's Mobile Detailing | Norman, OK">
+    <meta property="og:description" content="Professional mobile detailing in Norman, OK — we come to you. Interior, exterior, full details and ceramic coating. Free same-day quotes — call 572-235-2991.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:image" content="https://i.postimg.cc/NGZHgdNc/home-page.jpg">
+    <meta name="twitter:image" content="https://i.postimg.cc/NGZHgdNc/home-page.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap">
+    <style>
+/* Mason's Mobile Detailing — static site stylesheet
+   Dark garage-black surfaces, polished gold accent, condensed display type. */
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.16 0.006 60);
+  --foreground: oklch(0.96 0.004 90);
+  --card: oklch(0.21 0.007 65);
+  --card-foreground: oklch(0.96 0.004 90);
+  --primary: oklch(0.81 0.13 84);
+  --primary-foreground: oklch(0.17 0.01 70);
+  --secondary: oklch(0.26 0.008 70);
+  --muted: oklch(0.24 0.007 70);
+  --muted-foreground: oklch(0.7 0.012 80);
+  --accent: oklch(0.81 0.13 84);
+  --destructive: oklch(0.6 0.21 27);
+  --border: oklch(0.29 0.008 70);
+  --input: oklch(0.29 0.008 70);
+  --ring: oklch(0.81 0.13 84);
+  --surface: oklch(0.19 0.006 65);
+  --surface-raised: oklch(0.24 0.008 68);
+  --gradient-gold: linear-gradient(120deg, oklch(0.88 0.11 90), oklch(0.78 0.14 78));
+  --font-display: "Bebas Neue", ui-sans-serif, sans-serif;
+  --font-condensed: "Barlow Condensed", ui-sans-serif, sans-serif;
+  --font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif;
+  --shadow-gold: 0 18px 50px -18px color-mix(in oklab, var(--primary) 55%, transparent);
+}
+
+* { box-sizing: border-box; border-color: var(--border); }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  margin: 0;
+  font-weight: 400;
+}
+p { margin: 0; }
+ul, dl { margin: 0; padding: 0; list-style: none; }
+button { font: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+input, select, textarea { font: inherit; color: inherit; }
+
+.wrap { max-width: 80rem; margin-left: auto; margin-right: auto; padding-left: 1.25rem; padding-right: 1.25rem; }
+@media (min-width: 1024px) { .wrap { padding-left: 2rem; padding-right: 2rem; } }
+
+.eyebrow {
+  font-family: var(--font-condensed);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--primary);
+  display: block;
+}
+
+.gold-text {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gold-fill {
+  background: var(--gradient-gold);
+  color: var(--primary-foreground);
+}
+
+.panel {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+}
+
+.lead-form {
+  border: 6px solid #000;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), var(--shadow-panel, 0 24px 60px -30px oklch(0 0 0 / 0.9));
+  padding: 1.75rem;
+}
+@media (min-width: 640px) { .lead-form { padding: 2.25rem; } }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  padding: 1rem 1.75rem;
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+  white-space: nowrap;
+}
+.btn-gold { background: var(--gradient-gold); color: var(--primary-foreground); box-shadow: var(--shadow-gold); }
+.btn-gold:hover { transform: scale(1.03); }
+.btn-outline { border: 1px solid color-mix(in oklab, var(--primary) 50%, transparent); color: var(--primary); }
+.btn-outline:hover { background-color: color-mix(in oklab, var(--primary) 10%, transparent); }
+.btn-sm { padding: 0.75rem 1.25rem; font-size: 0.85rem; }
+.btn-block { width: 100%; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+.animate-rise { animation: rise 0.7s ease both; }
+
+/* Header */
+.site-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  background-color: color-mix(in oklab, var(--background) 85%, transparent);
+  backdrop-filter: blur(20px);
+}
+.site-header .row { height: 4rem; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: flex; align-items: center; gap: 0.65rem; }
+.brand img { height: 2.25rem; width: auto; }
+.brand span { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.02em; }
+.nav-desktop { display: none; align-items: center; gap: 0.25rem; }
+@media (min-width: 768px) { .nav-desktop { display: flex; } }
+.nav-desktop a.navlink {
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-condensed);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted-foreground);
+  transition: color 0.15s ease;
+}
+.nav-desktop a.navlink:hover, .nav-desktop a.navlink.active { color: var(--primary); }
+.nav-desktop .phone-link {
+  margin-left: 0.5rem;
+  border: 1px solid color-mix(in oklab, var(--primary) 40%, transparent);
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-condensed);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--primary);
+}
+.nav-desktop .phone-link:hover { background-color: color-mix(in oklab, var(--primary) 10%, transparent); }
+.nav-desktop .quote-link {
+  margin-left: 0.25rem;
+  border-radius: 0.375rem;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-condensed);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.menu-btn { display: flex; flex-direction: column; gap: 0.375rem; padding: 0.5rem; }
+.menu-btn span { display: block; height: 2px; width: 1.5rem; background-color: var(--foreground); }
+@media (min-width: 768px) { .menu-btn { display: none; } }
+.nav-mobile {
+  display: none;
+  border-top: 1px solid var(--border);
+  background-color: var(--background);
+  padding: 0.75rem 1.25rem 1.25rem;
+}
+.nav-mobile.open { display: block; }
+.nav-mobile a.navlink {
+  display: block;
+  padding: 0.625rem 0;
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted-foreground);
+}
+.nav-mobile a.navlink.active { color: var(--primary); }
+.nav-mobile .phone-cta {
+  margin-top: 0.5rem;
+  display: block;
+  border-radius: 0.375rem;
+  padding: 0.625rem 0;
+  text-align: center;
+  font-family: var(--font-condensed);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+@media (min-width: 768px) { .nav-mobile { display: none !important; } }
+
+main { padding-top: 0; }
+.page-offset { padding-top: 6rem; }
+
+/* Sticky mobile CTA */
+.sticky-cta {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 50;
+  border-top: 1px solid var(--border);
+  background-color: color-mix(in oklab, var(--background) 95%, transparent);
+  backdrop-filter: blur(20px);
+  padding: 0.75rem 1rem;
+  display: flex;
+  gap: 0.625rem;
+}
+@media (min-width: 768px) { .sticky-cta { display: none; } }
+.sticky-cta a { flex: 1; text-align: center; padding: 0.75rem 0; border-radius: 0.5rem; font-family: var(--font-condensed); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; }
+body { padding-bottom: 4.5rem; }
+@media (min-width: 768px) { body { padding-bottom: 0; } }
+
+/* Sections / grids */
+section { position: relative; }
+.section-y { padding-top: 5rem; padding-bottom: 5rem; }
+.border-y-section { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background-color: var(--surface); }
+
+.hero {
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: visible;
+  padding-bottom: 3rem;
+}
+.hero img.bg { position: absolute; inset: 0; height: 100%; width: 100%; object-fit: cover; }
+.hero .overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, oklch(0.13 0.005 60 / 0.94) 0%, oklch(0.13 0.005 60 / 0.75) 45%, oklch(0.13 0.005 60 / 0.35) 100%);
+}
+.hero .inner {
+  position: relative;
+  display: grid;
+  gap: 3rem;
+  width: 100%;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+#quote-hero { margin-top: 2rem; }
+@media (min-width: 1024px) { #quote-hero { margin-top: 4rem; align-self: start; } }
+@media (min-width: 1024px) { .hero .inner { grid-template-columns: 1.05fr 0.95fr; align-items: center; } }
+.badge-pill {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  border-radius: 999px; border: 1px solid color-mix(in oklab, var(--primary) 40%, transparent);
+  background-color: color-mix(in oklab, var(--background) 60%, transparent);
+  padding: 0.375rem 1rem;
+  font-family: var(--font-condensed); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.2em; color: var(--primary);
+}
+.hero h1 { margin-top: 1.25rem; font-size: 4rem; }
+@media (min-width: 640px) { .hero h1 { font-size: 5rem; } }
+@media (min-width: 1024px) { .hero h1 { font-size: 6.5rem; } }
+.hero p.sub { margin-top: 1.25rem; max-width: 36rem; color: var(--muted-foreground); font-size: 1rem; }
+@media (min-width: 640px) { .hero p.sub { font-size: 1.125rem; } }
+.hero .cta-row { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.hero .stats { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 2rem 1.25rem; font-size: 0.875rem; color: var(--muted-foreground); }
+.hero .stats strong { font-family: var(--font-display); font-size: 1.5rem; color: var(--primary); display: block; }
+
+.grid-4 { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .grid-4 { grid-template-columns: repeat(4, 1fr); } }
+.trust-title { font-family: var(--font-condensed); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; }
+.trust-desc { margin-top: 0.25rem; font-size: 0.875rem; color: var(--muted-foreground); }
+
+.grid-3 { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 1024px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+.grid-2 { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
+
+.card {
+  overflow: hidden; border-radius: 0.75rem; border: 1px solid var(--border); background-color: var(--surface);
+  transition: border-color 0.15s ease;
+}
+.card:hover { border-color: color-mix(in oklab, var(--primary) 50%, transparent); }
+.card .img-wrap { position: relative; height: 14rem; overflow: hidden; }
+.card .img-wrap img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.card:hover .img-wrap img { transform: scale(1.05); }
+.popular-badge {
+  position: absolute; left: 1rem; top: 1rem; border-radius: 999px; padding: 0.25rem 0.75rem;
+  font-family: var(--font-condensed); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em;
+}
+.card .body { padding: 1.5rem; }
+.card h3 { font-size: 1.875rem; }
+.price-row { margin-top: 0.25rem; display: flex; align-items: baseline; gap: 0.75rem; }
+.price-row .price { font-family: var(--font-display); font-size: 1.5rem; color: var(--primary); }
+.price-row .time { font-size: 0.75rem; color: var(--muted-foreground); }
+.card .blurb { margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.6; color: var(--muted-foreground); }
+.feature-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.375rem; font-size: 0.875rem; color: var(--muted-foreground); }
+.feature-list li { display: flex; gap: 0.5rem; }
+.feature-list .check { color: var(--primary); }
+.card .cta {
+  margin-top: 1.5rem; display: block; border-radius: 0.5rem; border: 1px solid color-mix(in oklab, var(--primary) 50%, transparent);
+  padding: 0.75rem 0; text-align: center; font-family: var(--font-condensed); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--primary);
+}
+.card .cta:hover { background-color: color-mix(in oklab, var(--primary) 10%, transparent); }
+
+.section-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+.link-arrow { font-family: var(--font-condensed); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--primary); }
+
+.ba-card { overflow: hidden; border-radius: 0.75rem; border: 1px solid var(--border); }
+.ba-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+.ba-img { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+.ba-img img { height: 100%; width: 100%; object-fit: cover; }
+.ba-tag { position: absolute; bottom: 0.75rem; left: 0.75rem; border-radius: 999px; padding: 0.25rem 0.625rem; font-family: var(--font-condensed); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; }
+.ba-tag.before { background-color: color-mix(in oklab, var(--background) 80%, transparent); color: var(--muted-foreground); }
+.ba-label { background-color: var(--background); padding: 0.75rem 1rem; font-family: var(--font-condensed); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted-foreground); }
+.ba-card.on-surface .ba-label { background-color: var(--surface); }
+
+.gallery-strip { margin-top: 2rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+@media (min-width: 640px) { .gallery-strip { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1024px) { .gallery-strip { grid-template-columns: repeat(4, 1fr); } }
+.gallery-strip .tile { overflow: hidden; border-radius: 0.5rem; aspect-ratio: 1 / 1; }
+.gallery-strip .tile.tall { aspect-ratio: 2 / 3; grid-row: span 2; }
+.gallery-strip .tile img { height: 100%; width: 100%; object-fit: cover; transition: transform 0.7s ease; }
+.gallery-strip .tile:hover img { transform: scale(1.05); }
+
+.gallery-cols { margin-top: 1.5rem; columns: 2; column-gap: 1rem; }
+@media (min-width: 768px) { .gallery-cols { columns: 3; } }
+@media (min-width: 1024px) { .gallery-cols { columns: 4; } }
+.gallery-cols img { margin-bottom: 1rem; width: 100%; border-radius: 0.5rem; object-fit: cover; break-inside: avoid; transition: transform 0.5s ease; }
+.gallery-cols img:hover { transform: scale(1.02); }
+
+.steps-grid { margin-top: 2.5rem; display: grid; gap: 2rem; }
+@media (min-width: 768px) { .steps-grid { grid-template-columns: repeat(3, 1fr); } }
+.step-num {
+  display: flex; height: 3.5rem; width: 3.5rem; align-items: center; justify-content: center;
+  border-radius: 999px; font-family: var(--font-display); font-size: 1.5rem; box-shadow: var(--shadow-gold);
+}
+.steps-grid h3 { margin-top: 1rem; font-size: 1.5rem; }
+.steps-grid p { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.6; color: var(--muted-foreground); }
+
+.review-card { overflow: hidden; border-radius: 0.75rem; border: 1px solid var(--border); background-color: var(--surface); }
+.review-card img { height: 12rem; width: 100%; object-fit: cover; }
+.review-card .body { padding: 1.5rem; }
+.stars { color: var(--primary); }
+.review-card .text { margin-top: 0.75rem; font-size: 0.875rem; line-height: 1.6; color: var(--muted-foreground); }
+.review-card .name { margin-top: 1rem; font-family: var(--font-condensed); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; }
+.review-card .meta { font-size: 0.75rem; color: var(--muted-foreground); }
+
+.faq-item { border-bottom: 1px solid var(--border); padding-bottom: 1.25rem; }
+.faq-item dt { font-family: var(--font-condensed); font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+.faq-item dd { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.6; color: var(--muted-foreground); }
+.faq-grid { display: grid; gap: 3rem; }
+@media (min-width: 1024px) { .faq-grid { grid-template-columns: repeat(2, 1fr); } }
+.faq-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+
+/* Form */
+.field-label { margin-bottom: 0.375rem; display: block; font-family: var(--font-condensed); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted-foreground); }
+.field {
+  width: 100%; border-radius: 0.5rem; border: 1px solid var(--input); background-color: var(--background);
+  padding: 0.75rem 0.875rem; font-size: 0.875rem; color: var(--foreground); outline: none; transition: border-color 0.15s ease;
+}
+.field::placeholder { color: var(--muted-foreground); }
+.field:focus { border-color: var(--primary); }
+.form-grid { margin-top: 1.5rem; display: grid; gap: 1rem; }
+@media (min-width: 640px) { .form-grid { grid-template-columns: repeat(2, 1fr); } }
+.form-grid .full { grid-column: 1 / -1; }
+.lead-form h3 { font-family: var(--font-display); font-size: 1.875rem; }
+.lead-form .sub { margin-top: 0.375rem; font-size: 0.875rem; color: var(--muted-foreground); }
+.lead-form button[type="submit"] { margin-top: 1.5rem; width: 100%; }
+.lead-form .note { margin-top: 0.75rem; text-align: center; font-size: 0.75rem; color: var(--muted-foreground); }
+.lead-form .error { margin-top: 0.75rem; text-align: center; font-size: 0.875rem; color: var(--destructive); }
+.lead-form.done { text-align: center; padding: 2rem; }
+.lead-form.done .headline { font-family: var(--font-display); font-size: 2.25rem; }
+.lead-form.done p { margin-top: 0.75rem; font-size: 0.875rem; color: var(--muted-foreground); }
+
+/* Pricing table */
+.table-wrap { margin-top: 2rem; overflow-x: auto; border-radius: 0.75rem; border: 1px solid var(--border); }
+table { width: 100%; min-width: 560px; border-collapse: collapse; text-align: left; font-size: 0.875rem; }
+thead { background-color: var(--surface); font-family: var(--font-condensed); text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted-foreground); }
+th, td { padding: 1rem 1.25rem; }
+tbody tr { border-top: 1px solid var(--border); }
+td.price { color: var(--primary); }
+
+.premium-badge { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem; border-radius: 999px; border: 1px solid color-mix(in oklab, var(--primary) 50%, transparent); background-color: color-mix(in oklab, var(--primary) 10%, transparent); padding: 0.375rem 1rem; font-family: var(--font-condensed); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--primary); }
+.dot-pulse { display: inline-block; height: 0.5rem; width: 0.5rem; border-radius: 999px; background-color: var(--primary); animation: pulse 1.6s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+.premium-grid { margin-top: 2rem; display: grid; gap: 1.5rem; }
+@media (min-width: 1024px) { .premium-grid { grid-template-columns: repeat(2, 1fr); } }
+.premium-card { position: relative; overflow: hidden; padding: 1.5rem; }
+.premium-card .ribbon { position: absolute; right: 0; top: 0; border-bottom-left-radius: 0.5rem; background-color: var(--primary); padding: 0.25rem 0.75rem; font-family: var(--font-condensed); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--background); }
+.premium-card h3 { font-size: 1.875rem; }
+.premium-card .blurb { margin-top: 0.5rem; font-size: 0.875rem; line-height: 1.6; color: var(--muted-foreground); }
+.tier-list { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.tier-list li { display: flex; align-items: center; justify-content: space-between; border-radius: 0.5rem; border: 1px solid var(--border); background-color: var(--background); padding: 0.75rem 1rem; }
+.tier-list li.popular { border-color: color-mix(in oklab, var(--primary) 60%, transparent); background-color: color-mix(in oklab, var(--primary) 5%, transparent); }
+.tier-list .label { font-family: var(--font-condensed); font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; }
+.tier-list .price { font-family: var(--font-display); font-size: 1.25rem; color: var(--primary); }
+
+.addon-grid { margin-top: 2rem; display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .addon-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .addon-grid { grid-template-columns: repeat(4, 1fr); } }
+.addon-card { border-radius: 0.5rem; border: 1px solid var(--border); background-color: var(--background); padding: 1rem; }
+.addon-card .name { font-family: var(--font-condensed); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; }
+.addon-card .price { margin-top: 0.25rem; font-family: var(--font-display); font-size: 1.25rem; color: var(--primary); }
+
+/* Footer */
+.site-footer { border-top: 1px solid var(--border); background-color: var(--surface); padding-top: 3.5rem; padding-bottom: 3.5rem; }
+.footer-grid { display: grid; gap: 2.5rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+.footer-brand { display: flex; align-items: center; gap: 0.65rem; }
+.footer-brand img { height: 2.25rem; width: auto; }
+.footer-brand span { font-family: var(--font-display); font-size: 1.5rem; }
+.footer-grid p { margin-top: 0.75rem; max-width: 20rem; font-size: 0.875rem; line-height: 1.6; color: var(--muted-foreground); }
+.footer-grid h3 { margin: 0; }
+.footer-grid ul { margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.875rem; color: var(--muted-foreground); }
+.footer-grid ul a:hover { color: var(--primary); }
+.footer-bottom { margin-top: 2.5rem; font-size: 0.75rem; color: var(--muted-foreground); }
+
+/* Book page specifics */
+.book-grid { display: grid; gap: 3rem; padding-top: 3rem; padding-bottom: 3rem; }
+@media (min-width: 1024px) { .book-grid { grid-template-columns: 1fr 1fr; } }
+.book-cta-row { margin-top: 2rem; display: grid; gap: 0.75rem; grid-template-columns: 1fr; }
+@media (min-width: 640px) { .book-cta-row { grid-template-columns: repeat(2, 1fr); } }
+.info-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.875rem; color: var(--muted-foreground); }
+.info-list dt { margin-bottom: 0.125rem; }
+.book-thumbs { margin-top: 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+.book-thumbs img { aspect-ratio: 1 / 1; width: 100%; border-radius: 0.5rem; object-fit: cover; }
+
+/* Text utilities */
+.text-muted { color: var(--muted-foreground); }
+.text-primary { color: var(--primary); }
+.max-w-prose { max-width: 42rem; }
+h1.page-title { font-size: 3.5rem; }
+@media (min-width: 640px) { h1.page-title { font-size: 4.5rem; } }
+.page-lead { margin-top: 1rem; max-width: 42rem; color: var(--muted-foreground); }
+
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="wrap row">
+            <a href="#home" class="brand">
+                <img src="https://i.postimg.cc/SRp8ffJp/logo-of-buisness.png" alt="Mason's Mobile Detailing logo">
+                <span class="gold-text">Mason's</span>
+            </a>
+            <nav class="nav-desktop" data-nav-desktop>
+            <a href="#home" data-nav="home" class="navlink">Home</a>
+            <a href="#services" data-nav="services" class="navlink">Services</a>
+            <a href="#gallery" data-nav="gallery" class="navlink">Gallery</a>
+            <a href="#book" data-nav="book" class="navlink">Book</a>
+                <a href="tel:5722352991" class="phone-link">572-235-2991</a>
+                <a href="#book" class="quote-link gold-fill">Free Quote</a>
+            </nav>
+            <button type="button" class="menu-btn" aria-label="Toggle menu" data-menu-btn>
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <nav class="nav-mobile" data-mobile-nav data-nav-mobile>
+        <a href="#home" data-nav="home" class="navlink">Home</a>
+        <a href="#services" data-nav="services" class="navlink">Services</a>
+        <a href="#gallery" data-nav="gallery" class="navlink">Gallery</a>
+        <a href="#book" data-nav="book" class="navlink">Book</a>
+            <a href="tel:5722352991" class="phone-cta gold-fill">Call / Text 572-235-2991</a>
+        </nav>
+    </header>
+
+    <main>
+    <section class="page" id="page-home">
+
+        <section class="hero">
+            <img class="bg" src="https://i.postimg.cc/NGZHgdNc/home-page.jpg" alt="Freshly detailed car with mirror-gloss paint">
+            <div class="overlay"></div>
+            <div class="wrap inner">
+                <div class="animate-rise">
+                    <span class="badge-pill">Mobile &middot; We come to you</span>
+                    <h1>Your car.<br><span class="gold-text">Our passion.</span></h1>
+                    <p class="sub">Professional detailing brought straight to your driveway in Norman, OK — deep interior cleans, paint correction, and multi-year ceramic coatings.</p>
+                    <div class="cta-row">
+                        <a href="#book" class="btn btn-gold">Get a Free Quote</a>
+                        <a href="tel:5722352991" class="btn btn-outline">Call / Text 572-235-2991</a>
+                    </div>
+                    <div class="stats">
+                        <span><strong>5★</strong> average rating</span>
+                        <span><strong>30 mi</strong> service radius</span>
+                        <span><strong>24 hr</strong> booking confirmation</span>
+                    </div>
+                </div>
+                <div class="animate-rise" id="quote-hero">
+            <form class="panel lead-form" data-lead-form data-phone="572-235-2991">
+                <h3>Get your free quote</h3>
+                <p class="sub">Takes 30 seconds. We reply fast — usually the same day.</p>
+                <div class="form-grid">
+                    <div>
+                        <label class="field-label" for="hero-name">Name</label>
+                        <input class="field" id="hero-name" name="name" required placeholder="Your name">
+                    </div>
+                    <div>
+                        <label class="field-label" for="hero-phone">Phone</label>
+                        <input class="field" id="hero-phone" name="phone" type="tel" required placeholder="(555) 555-5555">
+                    </div>
+                    <div>
+                        <label class="field-label" for="hero-vehicle">Vehicle size</label>
+                        <select class="field" id="hero-vehicle" name="vehicle_size" required defaultValue="">
+                        <option value="" disabled selected>Select size</option>
+                        <option>Coupe / Sedan</option>
+                        <option>SUV / Truck</option>
+                        <option>Large SUV / Crew Cab Truck</option>
+                        <option>XL SUV / Van (3-Row)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label" for="hero-service">Service</label>
+                        <select class="field" id="hero-service" name="service" required>
+                        <option value="" disabled selected>Select service</option>
+                        <option>Exterior Detail — from $75</option>
+                        <option>Interior Detail — from $105</option>
+                        <option>Full Detail — from $165</option>
+                        <option>Ceramic Coating — 3 Year — $550+</option>
+                        <option>Ceramic Coating — 5 Year — $750+</option>
+                        <option>Ceramic Coating — 8 Year — $1,100+</option>
+                        <option>1-Step Paint Correction — $275+</option>
+                        <option>2-Step Paint Correction — $375+</option>
+                        <option>Maintenance Wash — $50+</option>
+                        <option>Not sure — help me choose</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block">Get My Free Quote</button>
+                <p class="error" data-form-error hidden>Something went wrong. Please call or text 572-235-2991.</p>
+                <p class="note">No spam. No obligation. Prefer to talk? <a class="text-primary" href="tel:5722352991">Call / text 572-235-2991</a></p>
+            </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-y-section">
+            <div class="wrap grid-4" style="padding-top:2rem;padding-bottom:2rem;">
+            <div><div class="trust-title">We come to you</div><div class="trust-desc">Home, office, or anywhere you park</div></div>
+            <div><div class="trust-title">Fully equipped</div><div class="trust-desc">All pro-grade detailing tools & product on hand</div></div>
+            <div><div class="trust-title">Honest pricing</div><div class="trust-desc">Final price confirmed before we start</div></div>
+            <div><div class="trust-title">Fast replies</div><div class="trust-desc">Most quotes answered the same day</div></div>
+            </div>
+        </section>
+
+        <section class="section-y">
+            <div class="wrap">
+                <div class="max-w-prose">
+                    <p class="eyebrow">Packages</p>
+                    <h2 style="font-size:3rem;margin-top:0.5rem;">Pick your level of clean</h2>
+                </div>
+                <div class="grid-3" style="margin-top:2.5rem;">
+            <article class="card">
+                <div class="img-wrap">
+                    <img src="https://i.postimg.cc/5yRgYcCy/IMG-8643.jpg" alt="Exterior Detail result" loading="lazy">
+                    
+                </div>
+                <div class="body">
+                    <h3>Exterior Detail</h3>
+                    <div class="price-row"><span class="price">from $75</span><span class="time">~1 hour</span></div>
+                    <p class="blurb">A thorough exterior transformation — hand wash and a showroom-quality finish from top to bottom.</p>
+                    <ul class="feature-list">
+                        <li><span class="check">✓</span>Hand wash & rinse</li>
+                        <li><span class="check">✓</span>Tire & wheel cleaning</li>
+                        <li><span class="check">✓</span>Tire coating & protection</li>
+                        <li><span class="check">✓</span>Door jamb wipe-down</li>
+                        <li><span class="check">✓</span>Windows cleaned (exterior)</li>
+                    </ul>
+                    <a href="#book" class="cta">Get this quoted</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="img-wrap">
+                    <img src="https://i.postimg.cc/g0VgMBf1/IMG-8758.jpg" alt="Full Detail result" loading="lazy">
+                    <span class="popular-badge gold-fill">Most popular</span>
+                </div>
+                <div class="body">
+                    <h3>Full Detail</h3>
+                    <div class="price-row"><span class="price">from $165</span><span class="time">~2.5 hours</span></div>
+                    <p class="blurb">The complete package — inside and out. The best way to restore your vehicle to like-new condition.</p>
+                    <ul class="feature-list">
+                        <li><span class="check">✓</span>Everything in the exterior detail</li>
+                        <li><span class="check">✓</span>Full vacuum (seats, floors, trunk)</li>
+                        <li><span class="check">✓</span>Leather/vinyl clean & condition</li>
+                        <li><span class="check">✓</span>Dashboard, console & door panels</li>
+                        <li><span class="check">✓</span>UV protection — up to 3 months</li>
+                    </ul>
+                    <a href="#book" class="cta">Get this quoted</a>
+                </div>
+            </article>
+            <article class="card">
+                <div class="img-wrap">
+                    <img src="https://i.postimg.cc/XJnQtkWd/IMG-8750.jpg" alt="Interior Detail result" loading="lazy">
+                    
+                </div>
+                <div class="body">
+                    <h3>Interior Detail</h3>
+                    <div class="price-row"><span class="price">from $105</span><span class="time">~1.5 hours</span></div>
+                    <p class="blurb">Deep cleaning and restoration of every surface inside your vehicle — we leave no corner untouched.</p>
+                    <ul class="feature-list">
+                        <li><span class="check">✓</span>Full vacuum (seats, floors, trunk)</li>
+                        <li><span class="check">✓</span>Leather/vinyl cleaning & conditioning</li>
+                        <li><span class="check">✓</span>Dashboard & console detail</li>
+                        <li><span class="check">✓</span>Door panels wiped & dressed</li>
+                        <li><span class="check">✓</span>Windows cleaned (interior)</li>
+                    </ul>
+                    <a href="#book" class="cta">Get this quoted</a>
+                </div>
+            </article>
+                </div>
+                <div style="margin-top:2rem;">
+                    <a href="#services" class="link-arrow">See ceramic coating, paint correction &amp; add-ons →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-y-section">
+            <div class="wrap" style="padding-top:5rem;padding-bottom:5rem;">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow">Proof</p>
+                        <h2 style="font-size:3rem;margin-top:0.5rem;">Before &amp; after</h2>
+                    </div>
+                    <a href="#gallery" class="link-arrow">View full gallery →</a>
+                </div>
+                <div class="grid-2" style="margin-top:2.5rem;">
+                <div class="ba-card">
+                    <div class="ba-grid">
+                        <div class="ba-img"><img src="https://i.postimg.cc/0QZcvK5V/IMG-8747.jpg" alt="Full Detail before" loading="lazy"><span class="ba-tag before">Before</span></div>
+                        <div class="ba-img"><img src="https://i.postimg.cc/W4G59fQB/IMG-8757.jpg" alt="Full Detail after" loading="lazy"><span class="ba-tag gold-fill">After</span></div>
+                    </div>
+                    <div class="ba-label">Full Detail</div>
+                </div>
+                <div class="ba-card">
+                    <div class="ba-grid">
+                        <div class="ba-img"><img src="https://i.postimg.cc/yxbjgqZ6/IMG-8638.jpg" alt="Interior Detail before" loading="lazy"><span class="ba-tag before">Before</span></div>
+                        <div class="ba-img"><img src="https://i.postimg.cc/TYKC8Pz9/IMG-8659.jpg" alt="Interior Detail after" loading="lazy"><span class="ba-tag gold-fill">After</span></div>
+                    </div>
+                    <div class="ba-label">Interior Detail</div>
+                </div>
+                <div class="ba-card">
+                    <div class="ba-grid">
+                        <div class="ba-img"><img src="https://i.postimg.cc/PJxK5fPX/IMG-8745.jpg" alt="Wheel Transformation before" loading="lazy"><span class="ba-tag before">Before</span></div>
+                        <div class="ba-img"><img src="https://i.postimg.cc/PqWS6FgG/IMG-8755.jpg" alt="Wheel Transformation after" loading="lazy"><span class="ba-tag gold-fill">After</span></div>
+                    </div>
+                    <div class="ba-label">Wheel Transformation</div>
+                </div>
+                <div class="ba-card">
+                    <div class="ba-grid">
+                        <div class="ba-img"><img src="https://i.postimg.cc/wTcYZbhb/IMG-8346.jpg" alt="Pet Hair Removal before" loading="lazy"><span class="ba-tag before">Before</span></div>
+                        <div class="ba-img"><img src="https://i.postimg.cc/QxkZwnpR/IMG-8356.jpg" alt="Pet Hair Removal after" loading="lazy"><span class="ba-tag gold-fill">After</span></div>
+                    </div>
+                    <div class="ba-label">Pet Hair Removal</div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-y">
+            <div class="wrap">
+                <p class="eyebrow">Recent work</p>
+                <h2 style="font-size:3rem;margin-top:0.5rem;">Straight from the driveway</h2>
+                <div class="gallery-strip">
+            <div class="tile tall"><img src="https://i.postimg.cc/9QvbB59n/IMG-8278.jpg" alt="Detailed vehicle" loading="lazy"></div>
+            <div class="tile"><img src="https://i.postimg.cc/sXZRNR0C/IMG-8287.jpg" alt="Detailed vehicle" loading="lazy"></div>
+            <div class="tile"><img src="https://i.postimg.cc/VvQcyH2V/IMG-8288.jpg" alt="Detailed vehicle" loading="lazy"></div>
+            <div class="tile"><img src="https://i.postimg.cc/hj7q5qZN/IMG-8289.jpg" alt="Detailed vehicle" loading="lazy"></div>
+            <div class="tile"><img src="https://i.postimg.cc/5ydMckD7/IMG-8291.jpg" alt="Detailed vehicle" loading="lazy"></div>
+            <div class="tile tall"><img src="https://i.postimg.cc/zvCYqFrn/IMG-8292.jpg" alt="Detailed vehicle" loading="lazy"></div>
+            <div class="tile"><img src="https://i.postimg.cc/2yz2BQWV/IMG-8277.jpg" alt="Detailed vehicle" loading="lazy"></div>
+            <div class="tile"><img src="https://i.postimg.cc/zG97kZhQ/IMG-8279.jpg" alt="Detailed vehicle" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-y-section">
+            <div class="wrap" style="padding-top:5rem;padding-bottom:5rem;">
+                <p class="eyebrow">Simple process</p>
+                <h2 style="font-size:3rem;margin-top:0.5rem;">Three steps, zero hassle</h2>
+                <div class="steps-grid">
+            <div>
+                <div class="step-num gold-fill">1</div>
+                <h3>Request a quote</h3>
+                <p>Send the 30-second form or text us. We confirm price and timing fast.</p>
+            </div>
+            <div>
+                <div class="step-num gold-fill">2</div>
+                <h3>We show up</h3>
+                <p>We arrive fully equipped at your home, work, or wherever the car sits.</p>
+            </div>
+            <div>
+                <div class="step-num gold-fill">3</div>
+                <h3>Enjoy the shine</h3>
+                <p>Hand over the keys and get back a car that looks showroom fresh.</p>
+            </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-y">
+            <div class="wrap">
+                <p class="eyebrow">5-star rated</p>
+                <h2 style="font-size:3rem;margin-top:0.5rem;">What customers say</h2>
+                <div style="margin-top:2.5rem;">
+                    <!-- Elfsight Google Reviews | Untitled Google Reviews -->
+                    <script src="https://elfsightcdn.com/platform.js" async></script>
+                    <div class="elfsight-app-8bc51072-04c0-46a6-9610-91d0e30941a0" data-elfsight-app-lazy></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-y-section" style="border-bottom:none;">
+            <div class="wrap faq-grid" style="padding-top:5rem;padding-bottom:5rem;">
+                <div>
+                    <p class="eyebrow">Questions</p>
+                    <h2 style="font-size:3rem;margin-top:0.5rem;">Good to know</h2>
+                    <dl class="faq-list">
+                <div class="faq-item">
+                    <dt>Do you really come to me?</dt>
+                    <dd>Yes — every detail is mobile. We bring all the professional detailing equipment and product with us to your home, office, or wherever the vehicle is parked within 30 miles of Norman, OK. All we need from you is access to water and electricity.</dd>
+                </div>
+                <div class="faq-item">
+                    <dt>How fast can I get on the schedule?</dt>
+                    <dd>Most requests are confirmed within a few hours, and we can usually get you booked within 1–3 days. Call or text for same-week openings.</dd>
+                </div>
+                <div class="faq-item">
+                    <dt>How long does a detail take?</dt>
+                    <dd>Exterior details run about an hour, interiors about 90 minutes, and a full detail around 2.5 hours. Ceramic coatings are a full-day service.</dd>
+                </div>
+                <div class="faq-item">
+                    <dt>What does pricing depend on?</dt>
+                    <dd>Vehicle size and condition. Listed prices are starting points for a coupe/sedan — we always confirm the final number before any work begins.</dd>
+                </div>
+                    </dl>
+                </div>
+                <div id="quote">
+            <form class="panel lead-form" data-lead-form data-phone="572-235-2991">
+                <h3>Get your free quote</h3>
+                <p class="sub">Takes 30 seconds. We reply fast — usually the same day.</p>
+                <div class="form-grid">
+                    <div>
+                        <label class="field-label" for="main-name">Name</label>
+                        <input class="field" id="main-name" name="name" required placeholder="Your name">
+                    </div>
+                    <div>
+                        <label class="field-label" for="main-phone">Phone</label>
+                        <input class="field" id="main-phone" name="phone" type="tel" required placeholder="(555) 555-5555">
+                    </div>
+                    <div>
+                        <label class="field-label" for="main-vehicle">Vehicle size</label>
+                        <select class="field" id="main-vehicle" name="vehicle_size" required defaultValue="">
+                        <option value="" disabled selected>Select size</option>
+                        <option>Coupe / Sedan</option>
+                        <option>SUV / Truck</option>
+                        <option>Large SUV / Crew Cab Truck</option>
+                        <option>XL SUV / Van (3-Row)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label" for="main-service">Service</label>
+                        <select class="field" id="main-service" name="service" required>
+                        <option value="" disabled selected>Select service</option>
+                        <option>Exterior Detail — from $75</option>
+                        <option>Interior Detail — from $105</option>
+                        <option>Full Detail — from $165</option>
+                        <option>Ceramic Coating — 3 Year — $550+</option>
+                        <option>Ceramic Coating — 5 Year — $750+</option>
+                        <option>Ceramic Coating — 8 Year — $1,100+</option>
+                        <option>1-Step Paint Correction — $275+</option>
+                        <option>2-Step Paint Correction — $375+</option>
+                        <option>Maintenance Wash — $50+</option>
+                        <option>Not sure — help me choose</option>
+                        </select>
+                    </div>
+                <div>
+                    <label class="field-label" for="main-email">Email (optional)</label>
+                    <input class="field" id="main-email" name="email" type="email" placeholder="you@email.com">
+                </div>
+                <div>
+                    <label class="field-label" for="main-address">Service address / city</label>
+                    <input class="field" id="main-address" name="address" placeholder="Norman, OK">
+                </div>
+                <div class="full">
+                    <label class="field-label" for="main-notes">Anything we should know?</label>
+                    <textarea class="field" id="main-notes" name="notes" rows="3" placeholder="Pet hair, preferred days, ceramic questions…"></textarea>
+                </div>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block">Get My Free Quote</button>
+                <p class="error" data-form-error hidden>Something went wrong. Please call or text 572-235-2991.</p>
+                <p class="note">No spam. No obligation. Prefer to talk? <a class="text-primary" href="tel:5722352991">Call / text 572-235-2991</a></p>
+            </form>
+                </div>
+            </div>
+        </section>
+    
+    </section>
+    <section class="page page-offset" id="page-services" hidden>
+
+        <section>
+            <div class="wrap" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+                <p class="eyebrow">Services</p>
+                <h1 class="page-title" style="margin-top:0.5rem;">Priced up front. <span class="gold-text">No surprises.</span></h1>
+                <p class="page-lead">Listed prices are starting points for a coupe/sedan. Final pricing depends on vehicle size and condition — and we always confirm before any work begins.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="wrap" style="padding-bottom:4rem;">
+                <div class="grid-3">
+            <article class="card">
+                <img src="https://i.postimg.cc/5yRgYcCy/IMG-8643.jpg" alt="Exterior Detail" loading="lazy" style="height:13rem;width:100%;object-fit:cover;">
+                <div class="body">
+                    <h2 style="font-size:1.875rem;">Exterior Detail</h2>
+                    <div class="price" style="font-family:var(--font-display);font-size:1.5rem;color:var(--primary);">from $75</div>
+                    <p class="blurb">A thorough exterior transformation — hand wash and a showroom-quality finish from top to bottom.</p>
+                    <ul class="feature-list">
+                        <li><span class="check">✓</span>Hand wash & rinse</li>
+                        <li><span class="check">✓</span>Tire & wheel cleaning</li>
+                        <li><span class="check">✓</span>Tire coating & protection</li>
+                        <li><span class="check">✓</span>Door jamb wipe-down</li>
+                        <li><span class="check">✓</span>Windows cleaned (exterior)</li>
+                        <li><span class="check">✓</span>Paint protection — up to 3 months</li>
+                        <li><span class="check">✓</span>Trim dressing</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="card">
+                <img src="https://i.postimg.cc/g0VgMBf1/IMG-8758.jpg" alt="Full Detail" loading="lazy" style="height:13rem;width:100%;object-fit:cover;">
+                <div class="body">
+                    <h2 style="font-size:1.875rem;">Full Detail</h2>
+                    <div class="price" style="font-family:var(--font-display);font-size:1.5rem;color:var(--primary);">from $165</div>
+                    <p class="blurb">The complete package — inside and out. The best way to restore your vehicle to like-new condition.</p>
+                    <ul class="feature-list">
+                        <li><span class="check">✓</span>Everything in the exterior detail</li>
+                        <li><span class="check">✓</span>Full vacuum (seats, floors, trunk)</li>
+                        <li><span class="check">✓</span>Leather/vinyl clean & condition</li>
+                        <li><span class="check">✓</span>Dashboard, console & door panels</li>
+                        <li><span class="check">✓</span>UV protection — up to 3 months</li>
+                        <li><span class="check">✓</span>All windows cleaned in & out</li>
+                        <li><span class="check">✓</span>Air freshener of your choice</li>
+                    </ul>
+                </div>
+            </article>
+            <article class="card">
+                <img src="https://i.postimg.cc/XJnQtkWd/IMG-8750.jpg" alt="Interior Detail" loading="lazy" style="height:13rem;width:100%;object-fit:cover;">
+                <div class="body">
+                    <h2 style="font-size:1.875rem;">Interior Detail</h2>
+                    <div class="price" style="font-family:var(--font-display);font-size:1.5rem;color:var(--primary);">from $105</div>
+                    <p class="blurb">Deep cleaning and restoration of every surface inside your vehicle — we leave no corner untouched.</p>
+                    <ul class="feature-list">
+                        <li><span class="check">✓</span>Full vacuum (seats, floors, trunk)</li>
+                        <li><span class="check">✓</span>Leather/vinyl cleaning & conditioning</li>
+                        <li><span class="check">✓</span>Dashboard & console detail</li>
+                        <li><span class="check">✓</span>Door panels wiped & dressed</li>
+                        <li><span class="check">✓</span>Windows cleaned (interior)</li>
+                        <li><span class="check">✓</span>UV protection — up to 3 months</li>
+                        <li><span class="check">✓</span>Air freshener of your choice</li>
+                    </ul>
+                </div>
+            </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-y-section">
+            <div class="wrap" style="padding-top:4rem;padding-bottom:4rem;">
+                <p class="eyebrow">Premium</p>
+                <h2 style="font-size:3rem;margin-top:0.5rem;">Ceramic coating &amp; paint correction</h2>
+                <div class="premium-badge"><span class="dot-pulse"></span>Coming soon</div>
+                <div class="premium-grid">
+                <div class="panel premium-card">
+                    <div class="ribbon">Coming soon</div>
+                    <h3>Ceramic Coating</h3>
+                    <p class="blurb">A liquid polymer that bonds to your paint for a durable, hydrophobic layer that repels water, UV, and dirt — lasting years, not months. Exterior detail and 1-step correction included with every tier.</p>
+                    <ul class="tier-list">
+                        <li class=""><span class="label">3-Year Protection</span><span class="price">$550</span></li>
+                        <li class="popular"><span class="label">5-Year Protection</span><span class="price">$750</span></li>
+                        <li class=""><span class="label">8-Year Protection</span><span class="price">$1,100</span></li>
+                    </ul>
+                </div>
+                <div class="panel premium-card">
+                    <div class="ribbon">Coming soon</div>
+                    <h3>Paint Correction</h3>
+                    <p class="blurb">Machine polishing that removes swirls, water spots, and oxidation. Exterior detail included with both tiers.</p>
+                    <ul class="tier-list">
+                        <li class=""><span class="label">1-Step Correction</span><span class="price">$275</span></li>
+                        <li class=""><span class="label">2-Step Correction</span><span class="price">$375</span></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="wrap" style="padding-top:4rem;padding-bottom:4rem;">
+                <p class="eyebrow">Pricing by vehicle size</p>
+                <h2 style="font-size:3rem;margin-top:0.5rem;">Know before you book</h2>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr><th>Vehicle</th><th>Exterior</th><th>Interior</th><th>Full detail</th></tr>
+                        </thead>
+                        <tbody>
+                    <tr>
+                        <td>Coupe / Sedan</td>
+                        <td class="price">$75</td>
+                        <td class="price">$105</td>
+                        <td class="price">$165</td>
+                    </tr>
+                    <tr>
+                        <td>SUV / Truck</td>
+                        <td class="price">$95</td>
+                        <td class="price">$125</td>
+                        <td class="price">$176</td>
+                    </tr>
+                    <tr>
+                        <td>Large SUV / Crew Cab</td>
+                        <td class="price">$115</td>
+                        <td class="price">$150</td>
+                        <td class="price">$220</td>
+                    </tr>
+                    <tr>
+                        <td>XL SUV / Van (3-Row)</td>
+                        <td class="price">$125</td>
+                        <td class="price">$165</td>
+                        <td class="price">$240</td>
+                    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="border-y-section">
+            <div class="wrap" style="padding-top:4rem;padding-bottom:4rem;">
+                <p class="eyebrow">Enhance your detail</p>
+                <h2 style="font-size:3rem;margin-top:0.5rem;">Add-on services</h2>
+                <div class="addon-grid">
+                <div class="addon-card">
+                    <div class="name">Carpet Shampoo / Extraction</div>
+                    <div class="price">from $60</div>
+                </div>
+                <div class="addon-card">
+                    <div class="name">Steam Clean & Sanitize</div>
+                    <div class="price">from $60</div>
+                </div>
+                <div class="addon-card">
+                    <div class="name">Engine Bay Detail</div>
+                    <div class="price">from $40</div>
+                </div>
+                <div class="addon-card">
+                    <div class="name">Headlight Restoration</div>
+                    <div class="price">from $49</div>
+                </div>
+                <div class="addon-card">
+                    <div class="name">Trim Restoration</div>
+                    <div class="price">from $45</div>
+                </div>
+                <div class="addon-card">
+                    <div class="name">Clay Bar Decontamination</div>
+                    <div class="price">from $65</div>
+                </div>
+                <div class="addon-card">
+                    <div class="name">Pet Hair Removal</div>
+                    <div class="price">from $45</div>
+                </div>
+                <div class="addon-card">
+                    <div class="name">Ceramic Maintenance Wash</div>
+                    <div class="price">from $50</div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="wrap grid-2" style="padding-top:4rem;padding-bottom:4rem;">
+                <div>
+                    <h2 style="font-size:3rem;">Not sure which package?</h2>
+                    <p class="text-muted" style="margin-top:0.75rem;">Tell us the vehicle and what's bugging you about it — we'll recommend the right service and quote it same day. Or call <a class="text-primary" href="tel:5722352991">572-235-2991</a>.</p>
+                    <a href="#gallery" class="link-arrow" style="display:inline-block;margin-top:1.5rem;">See the results first →</a>
+                </div>
+            <form class="panel lead-form" data-lead-form data-phone="572-235-2991">
+                <h3>Get your free quote</h3>
+                <p class="sub">Takes 30 seconds. We reply fast — usually the same day.</p>
+                <div class="form-grid">
+                    <div>
+                        <label class="field-label" for="svc-name">Name</label>
+                        <input class="field" id="svc-name" name="name" required placeholder="Your name">
+                    </div>
+                    <div>
+                        <label class="field-label" for="svc-phone">Phone</label>
+                        <input class="field" id="svc-phone" name="phone" type="tel" required placeholder="(555) 555-5555">
+                    </div>
+                    <div>
+                        <label class="field-label" for="svc-vehicle">Vehicle size</label>
+                        <select class="field" id="svc-vehicle" name="vehicle_size" required defaultValue="">
+                        <option value="" disabled selected>Select size</option>
+                        <option>Coupe / Sedan</option>
+                        <option>SUV / Truck</option>
+                        <option>Large SUV / Crew Cab Truck</option>
+                        <option>XL SUV / Van (3-Row)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label" for="svc-service">Service</label>
+                        <select class="field" id="svc-service" name="service" required>
+                        <option value="" disabled selected>Select service</option>
+                        <option>Exterior Detail — from $75</option>
+                        <option>Interior Detail — from $105</option>
+                        <option>Full Detail — from $165</option>
+                        <option>Ceramic Coating — 3 Year — $550+</option>
+                        <option>Ceramic Coating — 5 Year — $750+</option>
+                        <option>Ceramic Coating — 8 Year — $1,100+</option>
+                        <option>1-Step Paint Correction — $275+</option>
+                        <option>2-Step Paint Correction — $375+</option>
+                        <option>Maintenance Wash — $50+</option>
+                        <option>Not sure — help me choose</option>
+                        </select>
+                    </div>
+                <div>
+                    <label class="field-label" for="svc-email">Email (optional)</label>
+                    <input class="field" id="svc-email" name="email" type="email" placeholder="you@email.com">
+                </div>
+                <div>
+                    <label class="field-label" for="svc-address">Service address / city</label>
+                    <input class="field" id="svc-address" name="address" placeholder="Norman, OK">
+                </div>
+                <div class="full">
+                    <label class="field-label" for="svc-notes">Anything we should know?</label>
+                    <textarea class="field" id="svc-notes" name="notes" rows="3" placeholder="Pet hair, preferred days, ceramic questions…"></textarea>
+                </div>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block">Get My Free Quote</button>
+                <p class="error" data-form-error hidden>Something went wrong. Please call or text 572-235-2991.</p>
+                <p class="note">No spam. No obligation. Prefer to talk? <a class="text-primary" href="tel:5722352991">Call / text 572-235-2991</a></p>
+            </form>
+            </div>
+        </section>
+    
+    </section>
+    <section class="page page-offset" id="page-gallery" hidden>
+
+        <section>
+            <div class="wrap" style="padding-top:2.5rem;padding-bottom:2.5rem;">
+                <p class="eyebrow">Gallery</p>
+                <h1 class="page-title" style="margin-top:0.5rem;">The <span class="gold-text">receipts.</span></h1>
+                <p class="page-lead">Every photo below is a real vehicle detailed in a customer's driveway.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="wrap" style="padding-bottom:4rem;">
+                <h2 style="font-size:2.25rem;">Before &amp; after</h2>
+                <div class="grid-2" style="margin-top:1.5rem;">
+                <div class="ba-card on-surface">
+                    <div class="ba-grid">
+                        <div class="ba-img"><img src="https://i.postimg.cc/0QZcvK5V/IMG-8747.jpg" alt="Full Detail before" loading="lazy"><span class="ba-tag before">Before</span></div>
+                        <div class="ba-img"><img src="https://i.postimg.cc/W4G59fQB/IMG-8757.jpg" alt="Full Detail after" loading="lazy"><span class="ba-tag gold-fill">After</span></div>
+                    </div>
+                    <div class="ba-label">Full Detail</div>
+                </div>
+                <div class="ba-card on-surface">
+                    <div class="ba-grid">
+                        <div class="ba-img"><img src="https://i.postimg.cc/yxbjgqZ6/IMG-8638.jpg" alt="Interior Detail before" loading="lazy"><span class="ba-tag before">Before</span></div>
+                        <div class="ba-img"><img src="https://i.postimg.cc/TYKC8Pz9/IMG-8659.jpg" alt="Interior Detail after" loading="lazy"><span class="ba-tag gold-fill">After</span></div>
+                    </div>
+                    <div class="ba-label">Interior Detail</div>
+                </div>
+                <div class="ba-card on-surface">
+                    <div class="ba-grid">
+                        <div class="ba-img"><img src="https://i.postimg.cc/PJxK5fPX/IMG-8745.jpg" alt="Wheel Transformation before" loading="lazy"><span class="ba-tag before">Before</span></div>
+                        <div class="ba-img"><img src="https://i.postimg.cc/PqWS6FgG/IMG-8755.jpg" alt="Wheel Transformation after" loading="lazy"><span class="ba-tag gold-fill">After</span></div>
+                    </div>
+                    <div class="ba-label">Wheel Transformation</div>
+                </div>
+                <div class="ba-card on-surface">
+                    <div class="ba-grid">
+                        <div class="ba-img"><img src="https://i.postimg.cc/wTcYZbhb/IMG-8346.jpg" alt="Pet Hair Removal before" loading="lazy"><span class="ba-tag before">Before</span></div>
+                        <div class="ba-img"><img src="https://i.postimg.cc/QxkZwnpR/IMG-8356.jpg" alt="Pet Hair Removal after" loading="lazy"><span class="ba-tag gold-fill">After</span></div>
+                    </div>
+                    <div class="ba-label">Pet Hair Removal</div>
+                </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="wrap" style="padding-bottom:4rem;">
+                <h2 style="font-size:2.25rem;">Recent details</h2>
+                <div class="gallery-cols">
+            <img src="https://i.postimg.cc/9QvbB59n/IMG-8278.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/sXZRNR0C/IMG-8287.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/VvQcyH2V/IMG-8288.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/hj7q5qZN/IMG-8289.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/5ydMckD7/IMG-8291.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/zvCYqFrn/IMG-8292.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/2yz2BQWV/IMG-8277.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/zG97kZhQ/IMG-8279.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/HnpB7wMx/IMG-8281.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/02G9vPkL/IMG-8283.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/BvzrHQc1/IMG-8272.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+            <img src="https://i.postimg.cc/mZKHbmd4/kia.jpg" alt="Detailed vehicle in Norman, OK" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <section class="border-y-section" style="border-bottom:none;">
+            <div class="wrap grid-2" style="padding-top:4rem;padding-bottom:4rem;">
+                <div>
+                    <h2 style="font-size:3rem;">Want your car in here?</h2>
+                    <p class="text-muted" style="margin-top:0.75rem;">Send a quick quote request and we'll get you scheduled. Prefer to talk? Call or text <a class="text-primary" href="tel:5722352991">572-235-2991</a>.</p>
+                </div>
+            <form class="panel lead-form" data-lead-form data-phone="572-235-2991">
+                <h3>Get your free quote</h3>
+                <p class="sub">Takes 30 seconds. We reply fast — usually the same day.</p>
+                <div class="form-grid">
+                    <div>
+                        <label class="field-label" for="gal-name">Name</label>
+                        <input class="field" id="gal-name" name="name" required placeholder="Your name">
+                    </div>
+                    <div>
+                        <label class="field-label" for="gal-phone">Phone</label>
+                        <input class="field" id="gal-phone" name="phone" type="tel" required placeholder="(555) 555-5555">
+                    </div>
+                    <div>
+                        <label class="field-label" for="gal-vehicle">Vehicle size</label>
+                        <select class="field" id="gal-vehicle" name="vehicle_size" required defaultValue="">
+                        <option value="" disabled selected>Select size</option>
+                        <option>Coupe / Sedan</option>
+                        <option>SUV / Truck</option>
+                        <option>Large SUV / Crew Cab Truck</option>
+                        <option>XL SUV / Van (3-Row)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label" for="gal-service">Service</label>
+                        <select class="field" id="gal-service" name="service" required>
+                        <option value="" disabled selected>Select service</option>
+                        <option>Exterior Detail — from $75</option>
+                        <option>Interior Detail — from $105</option>
+                        <option>Full Detail — from $165</option>
+                        <option>Ceramic Coating — 3 Year — $550+</option>
+                        <option>Ceramic Coating — 5 Year — $750+</option>
+                        <option>Ceramic Coating — 8 Year — $1,100+</option>
+                        <option>1-Step Paint Correction — $275+</option>
+                        <option>2-Step Paint Correction — $375+</option>
+                        <option>Maintenance Wash — $50+</option>
+                        <option>Not sure — help me choose</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block">Get My Free Quote</button>
+                <p class="error" data-form-error hidden>Something went wrong. Please call or text 572-235-2991.</p>
+                <p class="note">No spam. No obligation. Prefer to talk? <a class="text-primary" href="tel:5722352991">Call / text 572-235-2991</a></p>
+            </form>
+            </div>
+        </section>
+    
+    </section>
+    <section class="page page-offset" id="page-book" hidden>
+
+        <section>
+            <div class="wrap book-grid">
+                <div>
+                    <p class="eyebrow">Book</p>
+                    <h1 class="page-title" style="margin-top:0.5rem;">Free quote,<br><span class="gold-text">fast reply.</span></h1>
+                    <p class="page-lead">Fill out the form and we'll confirm your price and a time that works — usually within a few hours. Serving Norman, OK and everything within 30 miles.</p>
+
+                    <div class="book-cta-row">
+                        <a href="tel:5722352991" class="btn btn-outline">Call / Text 572-235-2991</a>
+                        <a href="https://square.site/appointments/buyer/widget/eppsjdas7ecbr8/LT8WP8DRYYP1Y" target="_blank" rel="noreferrer" class="btn btn-gold">Self-book online</a>
+                    </div>
+
+                    <dl class="info-list">
+                        <div><dt class="eyebrow">Hours</dt><dd>Mon–Sun · 8:00 AM – 6:00 PM</dd></div>
+                        <div><dt class="eyebrow">Email</dt><dd><a class="text-muted" href="mailto:masonsautodetailingnm@gmail.com">masonsautodetailingnm@gmail.com</a></dd></div>
+                        <div><dt class="eyebrow">Service area</dt><dd>Norman &middot; Moore &middot; Edmond &middot; Midwest City &middot; OKC Metro</dd></div>
+                    </dl>
+
+                    <div class="book-thumbs">
+                <img src="https://i.postimg.cc/9QvbB59n/IMG-8278.jpg" alt="Detailed vehicle" loading="lazy">
+                <img src="https://i.postimg.cc/sXZRNR0C/IMG-8287.jpg" alt="Detailed vehicle" loading="lazy">
+                <img src="https://i.postimg.cc/VvQcyH2V/IMG-8288.jpg" alt="Detailed vehicle" loading="lazy">
+                    </div>
+                </div>
+
+            <form class="panel lead-form" data-lead-form data-phone="572-235-2991">
+                <h3>Get your free quote</h3>
+                <p class="sub">Takes 30 seconds. We reply fast — usually the same day.</p>
+                <div class="form-grid">
+                    <div>
+                        <label class="field-label" for="book-name">Name</label>
+                        <input class="field" id="book-name" name="name" required placeholder="Your name">
+                    </div>
+                    <div>
+                        <label class="field-label" for="book-phone">Phone</label>
+                        <input class="field" id="book-phone" name="phone" type="tel" required placeholder="(555) 555-5555">
+                    </div>
+                    <div>
+                        <label class="field-label" for="book-vehicle">Vehicle size</label>
+                        <select class="field" id="book-vehicle" name="vehicle_size" required defaultValue="">
+                        <option value="" disabled selected>Select size</option>
+                        <option>Coupe / Sedan</option>
+                        <option>SUV / Truck</option>
+                        <option>Large SUV / Crew Cab Truck</option>
+                        <option>XL SUV / Van (3-Row)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="field-label" for="book-service">Service</label>
+                        <select class="field" id="book-service" name="service" required>
+                        <option value="" disabled selected>Select service</option>
+                        <option>Exterior Detail — from $75</option>
+                        <option>Interior Detail — from $105</option>
+                        <option>Full Detail — from $165</option>
+                        <option>Ceramic Coating — 3 Year — $550+</option>
+                        <option>Ceramic Coating — 5 Year — $750+</option>
+                        <option>Ceramic Coating — 8 Year — $1,100+</option>
+                        <option>1-Step Paint Correction — $275+</option>
+                        <option>2-Step Paint Correction — $375+</option>
+                        <option>Maintenance Wash — $50+</option>
+                        <option>Not sure — help me choose</option>
+                        </select>
+                    </div>
+                <div>
+                    <label class="field-label" for="book-email">Email (optional)</label>
+                    <input class="field" id="book-email" name="email" type="email" placeholder="you@email.com">
+                </div>
+                <div>
+                    <label class="field-label" for="book-address">Service address / city</label>
+                    <input class="field" id="book-address" name="address" placeholder="Norman, OK">
+                </div>
+                <div class="full">
+                    <label class="field-label" for="book-notes">Anything we should know?</label>
+                    <textarea class="field" id="book-notes" name="notes" rows="3" placeholder="Pet hair, preferred days, ceramic questions…"></textarea>
+                </div>
+                </div>
+                <button type="submit" class="btn btn-gold btn-block">Get My Free Quote</button>
+                <p class="error" data-form-error hidden>Something went wrong. Please call or text 572-235-2991.</p>
+                <p class="note">No spam. No obligation. Prefer to talk? <a class="text-primary" href="tel:5722352991">Call / text 572-235-2991</a></p>
+            </form>
+            </div>
+        </section>
+    
+    </section>
+    </main>
+    <footer class="site-footer">
+        <div class="wrap footer-grid">
+            <div>
+                <div class="footer-brand">
+                    <img src="https://i.postimg.cc/SRp8ffJp/logo-of-buisness.png" alt="">
+                    <span class="gold-text">Mason's</span>
+                </div>
+                <p>Professional mobile detailing serving Norman, OK and everything within 30 miles. Your car is our passion.</p>
+            </div>
+            <div>
+                <h3 class="eyebrow">Contact</h3>
+                <ul>
+                    <li><a href="tel:5722352991">572-235-2991</a></li>
+                    <li><a href="mailto:masonsautodetailingnm@gmail.com">masonsautodetailingnm@gmail.com</a></li>
+                    <li>Mon–Sun · 8:00 AM – 6:00 PM</li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="eyebrow">Explore</h3>
+                <ul>
+                    <li><a href="#services">Services &amp; Pricing</a></li>
+                    <li><a href="#gallery">Photo Gallery</a></li>
+                    <li><a href="#book">Book a Detail</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="eyebrow">Follow</h3>
+                <ul>
+                    <li><a href="https://www.facebook.com/profile.php?id=61590606995904" target="_blank" rel="noreferrer">Facebook</a></li>
+                    <li><a href="https://g.page/r/CbOOxURlVIoXEBM/review" target="_blank" rel="noreferrer">Google Reviews</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="wrap footer-bottom">&copy; <span data-year></span> Mason's Mobile Detailing &middot; Norman, Oklahoma</p>
+    </footer>
+
+    <div class="sticky-cta">
+        <a href="tel:5722352991" class="btn-outline">Call / Text</a>
+        <a href="#book" class="gold-fill">Get Free Quote</a>
+    </div>
+
+    <script>
+// Mason's Mobile Detailing — shared site behavior
+
+(function () {
+  // Mobile menu toggle
+  const menuBtn = document.querySelector("[data-menu-btn]");
+  const mobileNav = document.querySelector("[data-mobile-nav]");
+  if (menuBtn && mobileNav) {
+    menuBtn.addEventListener("click", () => {
+      mobileNav.classList.toggle("open");
+    });
+    mobileNav.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => mobileNav.classList.remove("open"));
+    });
+  }
+
+  // Mark active nav link based on current page
+  const path = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll("a.navlink").forEach((a) => {
+    const href = a.getAttribute("href");
+    if (href === path || (path === "" && href === "index.html")) {
+      a.classList.add("active");
+    }
+  });
+})();
+
+// Lead form submission (Formspree)
+function initLeadForm(formEl) {
+  if (!formEl) return;
+  const FORMSPREE_URL = "https://formspree.io/f/xwvjblae";
+  const submitBtn = formEl.querySelector('button[type="submit"]');
+  const errorEl = formEl.querySelector("[data-form-error]");
+  const phone = formEl.dataset.phone || "";
+
+  formEl.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (errorEl) errorEl.hidden = true;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending…";
+    }
+    try {
+      const res = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(formEl),
+      });
+      if (!res.ok) throw new Error("Request failed");
+
+      const wrapper = formEl.closest("[data-lead-form-wrapper]") || formEl.parentElement;
+      const doneHtml = `
+        <div class="panel lead-form done">
+          <div class="headline gold-text">Request Received</div>
+          <p>Thanks — we'll text or call you back with your quote, usually within a couple of hours. Need it sooner? Call <a class="text-primary" href="tel:${phone.replace(/[^0-9]/g, "")}">${phone}</a>.</p>
+        </div>`;
+      formEl.outerHTML = doneHtml;
+    } catch (err) {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Get My Free Quote";
+      }
+      if (errorEl) errorEl.hidden = false;
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-lead-form]").forEach(initLeadForm);
+});
+
+    </script>
+    <script>
+        document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+    </script>
+    <script>
+
+(function () {
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('[data-nav]'));
+
+  function showPage(slug) {
+    if (!pages.some(function (p) { return p.id === 'page-' + slug; })) slug = 'home';
+    pages.forEach(function (p) {
+      p.hidden = p.id !== 'page-' + slug;
+    });
+    navLinks.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('data-nav') === slug);
+    });
+    var mobileNav = document.querySelector('[data-mobile-nav]');
+    if (mobileNav) mobileNav.classList.remove('open');
+    window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+  }
+
+  function currentSlug() {
+    var hash = window.location.hash.replace('#', '');
+    return hash || 'home';
+  }
+
+  window.addEventListener('hashchange', function () {
+    showPage(currentSlug());
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    showPage(currentSlug());
+  });
+})();
+
+    </script>
+</body>
+</html>
